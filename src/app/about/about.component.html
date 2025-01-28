@@ -1,0 +1,10 @@
+<p>About Page</p>
+
+<h3>Usage of Built-in pipe</h3>
+<p>Original Date: {{ currentDate }}</p>
+<p>Formatted Date: {{ currentDate | date:'fullDate' }}</p>
+<p>Time: {{ currentDate | date:'shortTime' }}</p>
+
+<h3>Usage of Custom pipe</h3>
+<p>This is original message:  {{message}}</p>
+<p>This is tranformed via custom pipe: {{message | customUppercase}}</p>
