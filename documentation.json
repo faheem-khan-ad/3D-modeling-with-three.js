@@ -1,0 +1,1489 @@
+{
+  "pipes": [
+    {
+      "name": "CustomUppercasePipe",
+      "id": "pipe-CustomUppercasePipe-4756c09aa4a0843d859fb6085206ad32c1b6edc6e97e8ef0bb0fe8bf56960701f72f85e74856db2f9dd03e8637ce57af2e4c91583b8dc59ac24d75531ba8a21b",
+      "file": "src/app/pipes/custom-uppercase.pipe.ts",
+      "type": "pipe",
+      "deprecated": false,
+      "deprecationMessage": "",
+      "description": "",
+      "rawdescription": "\n",
+      "properties": [],
+      "methods": [
+        {
+          "name": "transform",
+          "args": [
+            {
+              "name": "value",
+              "type": "string",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "string",
+          "typeParameters": [],
+          "line": 7,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "jsdoctags": [
+            {
+              "name": "value",
+              "type": "string",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        }
+      ],
+      "standalone": false,
+      "ngname": "customUppercase",
+      "sourceCode": "import { Pipe, PipeTransform } from '@angular/core';\r\n\r\n@Pipe({\r\n  name: 'customUppercase',\r\n})\r\nexport class CustomUppercasePipe implements PipeTransform {\r\n  transform(value: string): string {\r\n    return value.toUpperCase(); \r\n  }\r\n}\r\n"
+    }
+  ],
+  "interfaces": [
+    {
+      "name": "User",
+      "id": "interface-User-d4821beac0e4a852e513391b7470981c4353fdd95a18628bb68136c8695b489ee15b926e2e5031bc26cf30e1508e0a362c3ee13a06734702b4d15af140e485d5",
+      "file": "src/stories/user.ts",
+      "deprecated": false,
+      "deprecationMessage": "",
+      "type": "interface",
+      "sourceCode": "export interface User {\n  name: string;\n}\n",
+      "properties": [
+        {
+          "name": "name",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "string",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 2
+        }
+      ],
+      "indexSignatures": [],
+      "kind": 171,
+      "methods": [],
+      "extends": []
+    }
+  ],
+  "injectables": [
+    {
+      "name": "DataService",
+      "id": "injectable-DataService-2aa7e93efa1fc722ddfec1e1e20d5680641824732bb052437cac4b29677cd897c6255249ff2975b60b2bb153743fc5e58fb9593a03c356109fe38082f3a1a2ab",
+      "file": "src/app/services/data.service.ts",
+      "properties": [
+        {
+          "name": "apiUrl",
+          "defaultValue": "'https://jsonplaceholder.typicode.com/posts'",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "string",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 9,
+          "modifierKind": [123]
+        }
+      ],
+      "methods": [
+        {
+          "name": "getPosts",
+          "args": [],
+          "optional": false,
+          "returnType": "Observable<any[]>",
+          "typeParameters": [],
+          "line": 13,
+          "deprecated": false,
+          "deprecationMessage": ""
+        }
+      ],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "description": "",
+      "rawdescription": "\n",
+      "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { Observable } from 'rxjs';\r\n\r\n@Injectable({\r\n  providedIn: 'root',\r\n})\r\nexport class DataService {\r\n  private apiUrl = 'https://jsonplaceholder.typicode.com/posts';\r\n\r\n  constructor(private http: HttpClient) {}\r\n\r\n  getPosts(): Observable<any[]> {\r\n    return this.http.get<any[]>(this.apiUrl);\r\n  }\r\n}\r\n",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "args": [
+          {
+            "name": "http",
+            "type": "HttpClient",
+            "deprecated": false,
+            "deprecationMessage": ""
+          }
+        ],
+        "line": 9,
+        "jsdoctags": [
+          {
+            "name": "http",
+            "type": "HttpClient",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          }
+        ]
+      },
+      "extends": [],
+      "type": "injectable"
+    }
+  ],
+  "guards": [],
+  "interceptors": [],
+  "classes": [],
+  "directives": [],
+  "components": [
+    {
+      "name": "AboutComponent",
+      "id": "component-AboutComponent-cbcffb79952aecff2c81c033936c5ec8c2bb13bab6f9cf97b417528bfd5c7867dbc6c811836fca33ec2c46e380e8bd710ced62988c11e737e907fdabd02c7aac",
+      "file": "src/app/about/about.component.ts",
+      "encapsulation": [],
+      "entryComponents": [],
+      "inputs": [],
+      "outputs": [],
+      "providers": [],
+      "selector": "app-about",
+      "styleUrls": [],
+      "styles": [],
+      "templateUrl": ["./about.component.html"],
+      "viewProviders": [],
+      "hostDirectives": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "propertiesClass": [
+        {
+          "name": "currentDate",
+          "defaultValue": "new Date()",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 12
+        },
+        {
+          "name": "message",
+          "defaultValue": "'all in lowercase'",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "string",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 13
+        }
+      ],
+      "methodsClass": [],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "hostBindings": [],
+      "hostListeners": [],
+      "standalone": false,
+      "imports": [
+        {
+          "name": "CommonModule",
+          "type": "module"
+        },
+        {
+          "name": "CustomUppercasePipe",
+          "type": "pipe"
+        }
+      ],
+      "description": "",
+      "rawdescription": "\n",
+      "type": "component",
+      "sourceCode": "import { Component } from '@angular/core';\r\nimport { CommonModule } from '@angular/common'\r\nimport { CustomUppercasePipe } from '../pipes/custom-uppercase.pipe';\r\n\r\n@Component({\r\n  selector: 'app-about',\r\n  imports: [CommonModule, CustomUppercasePipe],\r\n  templateUrl: './about.component.html',\r\n  styleUrl: './about.component.css'\r\n})\r\nexport class AboutComponent {\r\n  currentDate = new Date(); \r\n  message: string = 'all in lowercase'\r\n}\r\n",
+      "styleUrl": "./about.component.css",
+      "assetsDirs": [],
+      "styleUrlsData": "",
+      "stylesData": "",
+      "extends": [],
+      "templateData": "<p>About Page</p>\r\n\r\n<h3>Usage of Built-in pipe</h3>\r\n<p>Original Date: {{ currentDate }}</p>\r\n<p>Formatted Date: {{ currentDate | date:'fullDate' }}</p>\r\n<p>Time: {{ currentDate | date:'shortTime' }}</p>\r\n\r\n<h3>Usage of Custom pipe</h3>\r\n<p>This is original message:  {{message}}</p>\r\n<p>This is tranformed via custom pipe: {{message | customUppercase}}</p>\r\n"
+    },
+    {
+      "name": "AppComponent",
+      "id": "component-AppComponent-bb8a2573e73e5fbda69742690ea02e786cc42842e150597a390233199ad77da297638aebcde696350a74ee6235367accff05bc67ddb9bf2a1f900a8d9b0fb4c5",
+      "file": "src/app/app.component.ts",
+      "encapsulation": [],
+      "entryComponents": [],
+      "inputs": [],
+      "outputs": [],
+      "providers": [],
+      "selector": "app-root",
+      "styleUrls": ["./app.component.css"],
+      "styles": [],
+      "templateUrl": ["./app.component.html"],
+      "viewProviders": [],
+      "hostDirectives": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "propertiesClass": [
+        {
+          "name": "title",
+          "defaultValue": "'dummy-app'",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "string",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 12
+        }
+      ],
+      "methodsClass": [],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "hostBindings": [],
+      "hostListeners": [],
+      "standalone": false,
+      "imports": [
+        {
+          "name": "RouterModule",
+          "type": "module"
+        },
+        {
+          "name": "ThreeViewerComponent",
+          "type": "component"
+        }
+      ],
+      "description": "",
+      "rawdescription": "\n",
+      "type": "component",
+      "sourceCode": "import { Component } from '@angular/core';\r\nimport { RouterModule } from '@angular/router';\r\nimport { ThreeViewerComponent } from './three-viewer/three-viewer.component';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  imports: [RouterModule, ThreeViewerComponent],\r\n  templateUrl: './app.component.html',\r\n  styleUrls: ['./app.component.css'],\r\n})\r\nexport class AppComponent {\r\n  title = 'dummy-app';\r\n}\r\n",
+      "assetsDirs": [],
+      "styleUrlsData": [
+        {
+          "data": "nav {\r\n    display: flex;\r\n    justify-content: center;\r\n    margin-top: 5rem;\r\n  }\r\n nav > a {\r\n  margin-right: 4rem;\r\n  cursor: pointer;\r\n }\r\n.nav-item {\r\n    text-decoration: none;\r\n    border: 1px solid black;\r\n    border-radius: 8px;\r\n    padding: 5px 10px;\r\n    color: black;\r\n}\r\n\r\n.active-nav {\r\n    background-color: blue;\r\n    color: white;\r\n    font-weight: 500;\r\n    text-decoration: none;\r\n    border: 1px solid black;\r\n    border-radius: 8px;\r\n    padding: 5px 10px;\r\n}\r\n",
+          "styleUrl": "./app.component.css"
+        }
+      ],
+      "stylesData": "",
+      "extends": [],
+      "templateData": "\r\n  <nav>\r\n    <a routerLink=\"/\" class=\"nav-item\" routerLinkActive=\"active-nav\" [routerLinkActiveOptions]=\"{exact: true}\">Home</a>\r\n    <a routerLink=\"/about\" class=\"nav-item\" routerLinkActive=\"active-nav\">About</a>\r\n    <a routerLink=\"/services\" class=\"nav-item\" routerLinkActive=\"active-nav\">Services</a>\r\n    <a routerLink=\"/feature\" class=\"nav-item\" routerLinkActive=\"active-nav\">Feature</a>\r\n  </nav>\r\n    <app-three-viewer></app-three-viewer>\r\n<router-outlet />\r\n"
+    },
+    {
+      "name": "ButtonComponent",
+      "id": "component-ButtonComponent-d7bf0323e6da130e2609e2af0117b4a8d7cd874132206af50bf43dfc37044485fe50f2867ea76525730dd195b9b95a43802a12dadc6ad5cd7bf2faa07f19f0da",
+      "file": "src/stories/button.component.ts",
+      "encapsulation": [],
+      "entryComponents": [],
+      "inputs": [],
+      "outputs": [],
+      "providers": [],
+      "selector": "storybook-button",
+      "styleUrls": ["./button.css"],
+      "styles": [],
+      "template": " <button  type=\"button\"\n  (click)=\"onClick.emit($event)\"\n  [ngClass]=\"classes\"\n  [ngStyle]=\"{ 'background-color': backgroundColor }\"\n>\n  {{ label }}\n</button>",
+      "templateUrl": [],
+      "viewProviders": [],
+      "hostDirectives": [],
+      "inputsClass": [
+        {
+          "name": "backgroundColor",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\nWhat background color to use",
+          "description": "<p>What background color to use</p>\n",
+          "line": 25,
+          "type": "string",
+          "decorators": []
+        },
+        {
+          "name": "label",
+          "defaultValue": "'Button'",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "jsdoctags": [
+            {
+              "pos": 760,
+              "end": 773,
+              "kind": 327,
+              "id": 0,
+              "flags": 16842752,
+              "modifierFlagsCache": 0,
+              "transformFlags": 0,
+              "tagName": {
+                "pos": 761,
+                "end": 769,
+                "kind": 80,
+                "id": 0,
+                "flags": 16842752,
+                "transformFlags": 0,
+                "escapedText": "required"
+              },
+              "comment": ""
+            }
+          ],
+          "rawdescription": "\n\nButton contents\n\n",
+          "description": "<p>Button contents</p>\n",
+          "line": 37,
+          "type": "string",
+          "decorators": []
+        },
+        {
+          "name": "primary",
+          "defaultValue": "false",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\nIs this the principal call to action on the page?",
+          "description": "<p>Is this the principal call to action on the page?</p>\n",
+          "line": 21,
+          "type": "boolean",
+          "decorators": []
+        },
+        {
+          "name": "size",
+          "defaultValue": "'medium'",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\nHow large should the button be?",
+          "description": "<p>How large should the button be?</p>\n",
+          "line": 29,
+          "type": "\"small\" | \"medium\" | \"large\"",
+          "decorators": []
+        }
+      ],
+      "outputsClass": [
+        {
+          "name": "onClick",
+          "defaultValue": "new EventEmitter<Event>()",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\nOptional click handler",
+          "description": "<p>Optional click handler</p>\n",
+          "line": 41,
+          "type": "EventEmitter"
+        }
+      ],
+      "propertiesClass": [],
+      "methodsClass": [],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "hostBindings": [],
+      "hostListeners": [],
+      "standalone": true,
+      "imports": [
+        {
+          "name": "CommonModule",
+          "type": "module"
+        }
+      ],
+      "description": "",
+      "rawdescription": "\n",
+      "type": "component",
+      "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  standalone: true,\n  imports: [CommonModule],\n  template: ` <button\n  type=\"button\"\n  (click)=\"onClick.emit($event)\"\n  [ngClass]=\"classes\"\n  [ngStyle]=\"{ 'background-color': backgroundColor }\"\n>\n  {{ label }}\n</button>`,\n  styleUrls: ['./button.css'],\n})\nexport class ButtonComponent {\n  /** Is this the principal call to action on the page? */\n  @Input()\n  primary = false;\n\n  /** What background color to use */\n  @Input()\n  backgroundColor?: string;\n\n  /** How large should the button be? */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /** Optional click handler */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
+      "assetsDirs": [],
+      "styleUrlsData": [
+        {
+          "data": ".storybook-button {\n  display: inline-block;\n  cursor: pointer;\n  border: 0;\n  border-radius: 3em;\n  font-weight: 700;\n  line-height: 1;\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n}\n.storybook-button--primary {\n  background-color: #555ab9;\n  color: white;\n}\n.storybook-button--secondary {\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n  background-color: transparent;\n  color: #333;\n}\n.storybook-button--small {\n  padding: 10px 16px;\n  font-size: 12px;\n}\n.storybook-button--medium {\n  padding: 11px 20px;\n  font-size: 14px;\n}\n.storybook-button--large {\n  padding: 12px 24px;\n  font-size: 16px;\n}\n",
+          "styleUrl": "./button.css"
+        }
+      ],
+      "stylesData": "",
+      "extends": [],
+      "accessors": {
+        "classes": {
+          "name": "classes",
+          "getSignature": {
+            "name": "classes",
+            "type": "[]",
+            "returnType": "string[]",
+            "line": 43
+          }
+        }
+      }
+    },
+    {
+      "name": "FeatureComponent",
+      "id": "component-FeatureComponent-30ca95d6a703577f5fe4916aff08ee4e45754005d0821486f14cd37037d9b1c5a2cc0b774270016c7ed5e3d8c145cc0dff8b701b2792350e0a681fb82986981e",
+      "file": "src/app/features/feature/feature.component.ts",
+      "encapsulation": [],
+      "entryComponents": [],
+      "inputs": [],
+      "outputs": [],
+      "providers": [],
+      "selector": "app-feature",
+      "styleUrls": [],
+      "styles": [],
+      "templateUrl": ["./feature.component.html"],
+      "viewProviders": [],
+      "hostDirectives": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "propertiesClass": [],
+      "methodsClass": [
+        {
+          "name": "backToHome",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 16,
+          "deprecated": false,
+          "deprecationMessage": ""
+        }
+      ],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "hostBindings": [],
+      "hostListeners": [],
+      "standalone": false,
+      "imports": [],
+      "description": "",
+      "rawdescription": "\n",
+      "type": "component",
+      "sourceCode": "import { Component } from '@angular/core';\r\nimport { Router } from '@angular/router';\r\n\r\n@Component({\r\n  selector: 'app-feature',\r\n  imports: [],\r\n  templateUrl: './feature.component.html',\r\n  styleUrl: './feature.component.css'\r\n})\r\nexport class FeatureComponent {\r\n\r\n  constructor(private router: Router){\r\n\r\n  }\r\n\r\n  backToHome () {\r\n    this.router.navigateByUrl('/')\r\n  }\r\n\r\n}\r\n",
+      "styleUrl": "./feature.component.css",
+      "assetsDirs": [],
+      "styleUrlsData": "",
+      "stylesData": "",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "args": [
+          {
+            "name": "router",
+            "type": "Router",
+            "deprecated": false,
+            "deprecationMessage": ""
+          }
+        ],
+        "line": 10,
+        "jsdoctags": [
+          {
+            "name": "router",
+            "type": "Router",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          }
+        ]
+      },
+      "extends": [],
+      "templateData": "<p>feature works!</p>\r\n\r\n<div class=\"back-button-container\">\r\n    <button (click)=\"backToHome()\">Back to Home</button>\r\n</div>"
+    },
+    {
+      "name": "HeaderComponent",
+      "id": "component-HeaderComponent-48b9abe37706bc42f20cfa97ed9f943678344ea7d254c0c82183c657750c2191b43486fe730c778627b2ea6aa0e2f33a7abcf3ce08b68ad18b062ad99ea97acb",
+      "file": "src/stories/header.component.ts",
+      "encapsulation": [],
+      "entryComponents": [],
+      "inputs": [],
+      "outputs": [],
+      "providers": [],
+      "selector": "storybook-header",
+      "styleUrls": ["./header.css"],
+      "styles": [],
+      "template": "<header>  <div class=\"storybook-header\">\n    <div>\n      <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n        <g fill=\"none\" fillRule=\"evenodd\">\n          <path\n            d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n            fill=\"#FFF\"\n          />\n          <path\n            d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n            fill=\"#555AB9\"\n          />\n          <path d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\" fill=\"#91BAF8\" />\n        </g>\n      </svg>\n      <h1>Acme</h1>\n    </div>\n    <div>\n      <div *ngIf=\"user\">\n        <span class=\"welcome\">\n          Welcome, <b>{{ user.name }}</b\n          >!\n        </span>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n      </div>\n      <div *ngIf=\"!user\">\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          class=\"margin-left\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          [primary]=\"true\"\n          class=\"margin-left\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </div>\n</header>",
+      "templateUrl": [],
+      "viewProviders": [],
+      "hostDirectives": [],
+      "inputsClass": [
+        {
+          "name": "user",
+          "defaultValue": "null",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "line": 66,
+          "type": "User | null",
+          "decorators": []
+        }
+      ],
+      "outputsClass": [
+        {
+          "name": "onCreateAccount",
+          "defaultValue": "new EventEmitter<Event>()",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "line": 75,
+          "type": "EventEmitter"
+        },
+        {
+          "name": "onLogin",
+          "defaultValue": "new EventEmitter<Event>()",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "line": 69,
+          "type": "EventEmitter"
+        },
+        {
+          "name": "onLogout",
+          "defaultValue": "new EventEmitter<Event>()",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "line": 72,
+          "type": "EventEmitter"
+        }
+      ],
+      "propertiesClass": [],
+      "methodsClass": [],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "hostBindings": [],
+      "hostListeners": [],
+      "standalone": true,
+      "imports": [
+        {
+          "name": "CommonModule",
+          "type": "module"
+        },
+        {
+          "name": "ButtonComponent",
+          "type": "component"
+        }
+      ],
+      "description": "",
+      "rawdescription": "\n",
+      "type": "component",
+      "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { ButtonComponent } from './button.component';\nimport type { User } from './user';\n\n@Component({\n  selector: 'storybook-header',\n  standalone: true,\n  imports: [CommonModule, ButtonComponent],\n  template: `<header>\n  <div class=\"storybook-header\">\n    <div>\n      <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n        <g fill=\"none\" fillRule=\"evenodd\">\n          <path\n            d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n            fill=\"#FFF\"\n          />\n          <path\n            d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n            fill=\"#555AB9\"\n          />\n          <path d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\" fill=\"#91BAF8\" />\n        </g>\n      </svg>\n      <h1>Acme</h1>\n    </div>\n    <div>\n      <div *ngIf=\"user\">\n        <span class=\"welcome\">\n          Welcome, <b>{{ user.name }}</b\n          >!\n        </span>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n      </div>\n      <div *ngIf=\"!user\">\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          class=\"margin-left\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          [primary]=\"true\"\n          class=\"margin-left\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </div>\n</header>`,\n  styleUrls: ['./header.css'],\n})\nexport class HeaderComponent {\n  @Input()\n  user: User | null = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
+      "assetsDirs": [],
+      "styleUrlsData": [
+        {
+          "data": ".storybook-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n}\n\n.storybook-header svg {\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-header h1 {\n  display: inline-block;\n  vertical-align: top;\n  margin: 6px 0 6px 10px;\n  font-weight: 700;\n  font-size: 20px;\n  line-height: 1;\n}\n\n.storybook-header button + button {\n  margin-left: 10px;\n}\n\n.storybook-header .welcome {\n  margin-right: 10px;\n  color: #333;\n  font-size: 14px;\n}\n",
+          "styleUrl": "./header.css"
+        }
+      ],
+      "stylesData": "",
+      "extends": []
+    },
+    {
+      "name": "HomeComponent",
+      "id": "component-HomeComponent-e2e724d41297ee0a549fde92dc11cb15eea07613fc29a6651c20b2fd1839c78f37ea5c914ab39999687e12330f558465f91298bb4152a30250946377b39d8138",
+      "file": "src/app/home/home.component.ts",
+      "encapsulation": [],
+      "entryComponents": [],
+      "inputs": [],
+      "outputs": [],
+      "providers": [],
+      "selector": "app-home",
+      "styleUrls": [],
+      "styles": [],
+      "templateUrl": ["./home.component.html"],
+      "viewProviders": [],
+      "hostDirectives": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "propertiesClass": [
+        {
+          "name": "divColor",
+          "defaultValue": "'red'",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "string",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 11
+        },
+        {
+          "name": "isDivPresent",
+          "defaultValue": "true",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "boolean",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 12
+        },
+        {
+          "name": "name",
+          "defaultValue": "\"\"",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "string",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 13
+        }
+      ],
+      "methodsClass": [
+        {
+          "name": "hideDiv",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 21,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "showDiv",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 18,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "toggleColor",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 15,
+          "deprecated": false,
+          "deprecationMessage": ""
+        }
+      ],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "hostBindings": [],
+      "hostListeners": [],
+      "standalone": false,
+      "imports": [
+        {
+          "name": "FormsModule",
+          "type": "module"
+        }
+      ],
+      "description": "",
+      "rawdescription": "\n",
+      "type": "component",
+      "sourceCode": "import { Component } from '@angular/core';\r\nimport { FormsModule } from '@angular/forms'; \r\n\r\n@Component({\r\n  selector: 'app-home',\r\n  imports: [FormsModule],\r\n  templateUrl: './home.component.html',\r\n  styleUrl: './home.component.css'\r\n})\r\nexport class HomeComponent {\r\n  divColor: string = 'red';\r\n  isDivPresent: boolean = true;\r\n  name: string = \"\"\r\n\r\n  toggleColor() {\r\n    this.divColor = this.divColor === 'red' ? 'green' : 'red';\r\n  }\r\n  showDiv() {\r\n    this.isDivPresent = true\r\n  }\r\n  hideDiv() {\r\n    this.isDivPresent = false\r\n  }\r\n}\r\n",
+      "styleUrl": "./home.component.css",
+      "assetsDirs": [],
+      "styleUrlsData": "",
+      "stylesData": "",
+      "extends": [],
+      "templateData": "<p>Home Page</p>\r\n\r\n<h3>Usage of one way binding</h3>\r\n<div>\r\n    <div [style.background-color]=\"divColor\" style=\"width: 100px; height: 100px; border: 1px solid black;\">\r\n        {{ divColor }}\r\n    </div>\r\n\r\n    <button (click)=\"toggleColor()\">Toggle Color</button>\r\n</div>\r\n\r\n<h3>Usage of Two way binding</h3>\r\n<input type=\"text\" [(ngModel)]=\"name\" placeholder=\"Enter your name\" />\r\n\r\n<p>Hello, {{ name }}!</p>\r\n\r\n<h3>Usage of built-in Directive</h3>\r\n<div>\r\n    @if (isDivPresent) {\r\n    <div style=\"width: 100px; height: 100px; border: 1px solid black; background-color: yellow;\">\r\n        Visible\r\n    </div>\r\n    } @else {\r\n    <div style=\"width: 100px; height: 100px;\">Hidden</div>\r\n    }\r\n\r\n    <button (click)=\"showDiv()\">Show Div</button>\r\n    <button (click)=\"hideDiv()\">Hide Div</button>\r\n</div>"
+    },
+    {
+      "name": "PageComponent",
+      "id": "component-PageComponent-21dd6eb370b4983b5c21c84d40e6f54d266a9d9af9889e6e76b35c43058bd53b3e451bad089d5adf4bea46647ba10265a2fa8cb15630398e75636307d4817fc6",
+      "file": "src/stories/page.component.ts",
+      "encapsulation": [],
+      "entryComponents": [],
+      "inputs": [],
+      "outputs": [],
+      "providers": [],
+      "selector": "storybook-page",
+      "styleUrls": ["./page.css"],
+      "styles": [],
+      "template": "<article>  <storybook-header\n    [user]=\"user\"\n    (onLogout)=\"doLogout()\"\n    (onLogin)=\"doLogin()\"\n    (onCreateAccount)=\"doCreateAccount()\"\n  ></storybook-header>\n  <section class=\"storybook-page\">\n    <h2>Pages in Storybook</h2>\n    <p>\n      We recommend building UIs with a\n      <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n        <strong>component-driven</strong>\n      </a>\n      process starting with atomic components and ending with pages.\n    </p>\n    <p>\n      Render pages with mock data. This makes it easy to build and review page states without\n      needing to navigate to them in your app. Here are some handy patterns for managing page data\n      in Storybook:\n    </p>\n    <ul>\n      <li>\n        Use a higher-level connected component. Storybook helps you compose such data from the\n        \"args\" of child component stories\n      </li>\n      <li>\n        Assemble data in the page component from your services. You can mock these services out\n        using Storybook.\n      </li>\n    </ul>\n    <p>\n      Get a guided tutorial on component-driven development at\n      <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n        Storybook tutorials\n      </a>\n      . Read more in the\n      <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n      .\n    </p>\n    <div class=\"tip-wrapper\">\n      <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n      <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n        <g fill=\"none\" fillRule=\"evenodd\">\n          <path\n            d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n            id=\"a\"\n            fill=\"#999\"\n          />\n        </g>\n      </svg>\n      Viewports addon in the toolbar\n    </div>\n  </section>\n</article>",
+      "templateUrl": [],
+      "viewProviders": [],
+      "hostDirectives": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "propertiesClass": [
+        {
+          "name": "user",
+          "defaultValue": "null",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "User | null",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 69
+        }
+      ],
+      "methodsClass": [
+        {
+          "name": "doCreateAccount",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 79,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "doLogin",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 75,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "doLogout",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 71,
+          "deprecated": false,
+          "deprecationMessage": ""
+        }
+      ],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "hostBindings": [],
+      "hostListeners": [],
+      "standalone": true,
+      "imports": [
+        {
+          "name": "CommonModule",
+          "type": "module"
+        },
+        {
+          "name": "HeaderComponent",
+          "type": "component"
+        }
+      ],
+      "description": "",
+      "rawdescription": "\n",
+      "type": "component",
+      "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { HeaderComponent } from './header.component';\nimport type { User } from './user';\n\n@Component({\n  selector: 'storybook-page',\n  standalone: true,\n  imports: [CommonModule, HeaderComponent],\n  template: `<article>\n  <storybook-header\n    [user]=\"user\"\n    (onLogout)=\"doLogout()\"\n    (onLogin)=\"doLogin()\"\n    (onCreateAccount)=\"doCreateAccount()\"\n  ></storybook-header>\n  <section class=\"storybook-page\">\n    <h2>Pages in Storybook</h2>\n    <p>\n      We recommend building UIs with a\n      <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n        <strong>component-driven</strong>\n      </a>\n      process starting with atomic components and ending with pages.\n    </p>\n    <p>\n      Render pages with mock data. This makes it easy to build and review page states without\n      needing to navigate to them in your app. Here are some handy patterns for managing page data\n      in Storybook:\n    </p>\n    <ul>\n      <li>\n        Use a higher-level connected component. Storybook helps you compose such data from the\n        \"args\" of child component stories\n      </li>\n      <li>\n        Assemble data in the page component from your services. You can mock these services out\n        using Storybook.\n      </li>\n    </ul>\n    <p>\n      Get a guided tutorial on component-driven development at\n      <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n        Storybook tutorials\n      </a>\n      . Read more in the\n      <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n      .\n    </p>\n    <div class=\"tip-wrapper\">\n      <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n      <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n        <g fill=\"none\" fillRule=\"evenodd\">\n          <path\n            d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n            id=\"a\"\n            fill=\"#999\"\n          />\n        </g>\n      </svg>\n      Viewports addon in the toolbar\n    </div>\n  </section>\n</article>`,\n  styleUrls: ['./page.css'],\n})\nexport class PageComponent {\n  user: User | null = null;\n\n  doLogout() {\n    this.user = null;\n  }\n\n  doLogin() {\n    this.user = { name: 'Jane Doe' };\n  }\n\n  doCreateAccount() {\n    this.user = { name: 'Jane Doe' };\n  }\n}\n",
+      "assetsDirs": [],
+      "styleUrlsData": [
+        {
+          "data": ".storybook-page {\n  margin: 0 auto;\n  padding: 48px 20px;\n  max-width: 600px;\n  color: #333;\n  font-size: 14px;\n  line-height: 24px;\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n}\n\n.storybook-page h2 {\n  display: inline-block;\n  vertical-align: top;\n  margin: 0 0 4px;\n  font-weight: 700;\n  font-size: 32px;\n  line-height: 1;\n}\n\n.storybook-page p {\n  margin: 1em 0;\n}\n\n.storybook-page a {\n  color: inherit;\n}\n\n.storybook-page ul {\n  margin: 1em 0;\n  padding-left: 30px;\n}\n\n.storybook-page li {\n  margin-bottom: 8px;\n}\n\n.storybook-page .tip {\n  display: inline-block;\n  vertical-align: top;\n  margin-right: 10px;\n  border-radius: 1em;\n  background: #e7fdd8;\n  padding: 4px 12px;\n  color: #357a14;\n  font-weight: 700;\n  font-size: 11px;\n  line-height: 12px;\n}\n\n.storybook-page .tip-wrapper {\n  margin-top: 40px;\n  margin-bottom: 40px;\n  font-size: 13px;\n  line-height: 20px;\n}\n\n.storybook-page .tip-wrapper svg {\n  display: inline-block;\n  vertical-align: top;\n  margin-top: 3px;\n  margin-right: 4px;\n  width: 12px;\n  height: 12px;\n}\n\n.storybook-page .tip-wrapper svg path {\n  fill: #1ea7fd;\n}\n",
+          "styleUrl": "./page.css"
+        }
+      ],
+      "stylesData": "",
+      "extends": []
+    },
+    {
+      "name": "ServiceExampleComponent",
+      "id": "component-ServiceExampleComponent-78f754937ebb54a00fd550d382bde1e7d4ef2e28578a28af98988bde46f7334a3c2135f5db1793467cb3ad33d8455ee7a26d497e721d3e23e07b0a6315d0392c",
+      "file": "src/app/service-example/service-example.component.ts",
+      "encapsulation": [],
+      "entryComponents": [],
+      "inputs": [],
+      "outputs": [],
+      "providers": [],
+      "selector": "app-service-example",
+      "styleUrls": [],
+      "styles": [],
+      "templateUrl": ["./service-example.component.html"],
+      "viewProviders": [],
+      "hostDirectives": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "propertiesClass": [
+        {
+          "name": "posts",
+          "defaultValue": "[]",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "any[]",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 12
+        }
+      ],
+      "methodsClass": [
+        {
+          "name": "ngOnInit",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 16,
+          "deprecated": false,
+          "deprecationMessage": ""
+        }
+      ],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "hostBindings": [],
+      "hostListeners": [],
+      "standalone": true,
+      "imports": [
+        {
+          "name": "CommonModule",
+          "type": "module"
+        }
+      ],
+      "description": "",
+      "rawdescription": "\n",
+      "type": "component",
+      "sourceCode": "import { Component, OnInit } from '@angular/core';\r\nimport { DataService } from '../services/data.service';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'app-service-example',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './service-example.component.html',\r\n})\r\nexport class ServiceExampleComponent implements OnInit {\r\n  posts: any[] = [];\r\n\r\n  constructor(private dataService: DataService) {}\r\n\r\n  ngOnInit() {\r\n    this.dataService.getPosts().subscribe((data) => {\r\n      this.posts = data.slice(0, 15); \r\n    });\r\n  }\r\n}\r\n",
+      "assetsDirs": [],
+      "styleUrlsData": "",
+      "stylesData": "",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "args": [
+          {
+            "name": "dataService",
+            "type": "DataService",
+            "deprecated": false,
+            "deprecationMessage": ""
+          }
+        ],
+        "line": 12,
+        "jsdoctags": [
+          {
+            "name": "dataService",
+            "type": "DataService",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          }
+        ]
+      },
+      "extends": [],
+      "implements": ["OnInit"],
+      "templateData": "<h2>Service Example</h2>\r\n\r\n<!-- Using For Loop -->\r\n<h3>Using For Loop and Api calling</h3>\r\n<ul>\r\n  <li *ngFor=\"let post of posts\">\r\n    {{ post.title }}\r\n  </li>\r\n</ul>\r\n\r\n"
+    },
+    {
+      "name": "ThreeViewerComponent",
+      "id": "component-ThreeViewerComponent-7f33464017f5f6657d660502cfb57a17826e382f8066c74777c3ccb3339b74d1cff289c82d9ce87cad5bbb31f2ad2d3d7466109e167bc39804bdb21d2392fe8a",
+      "file": "src/app/three-viewer/three-viewer.component.ts",
+      "encapsulation": [],
+      "entryComponents": [],
+      "inputs": [],
+      "outputs": [],
+      "providers": [],
+      "selector": "app-three-viewer",
+      "styleUrls": ["./three-viewer.component.css"],
+      "styles": [],
+      "templateUrl": ["./three-viewer.component.html"],
+      "viewProviders": [],
+      "hostDirectives": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "propertiesClass": [
+        {
+          "name": "boundingBoxes",
+          "defaultValue": "[]",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "THREE.LineSegments[]",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 20,
+          "modifierKind": [123]
+        },
+        {
+          "name": "camera",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "THREE.PerspectiveCamera",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 17,
+          "modifierKind": [123]
+        },
+        {
+          "name": "controls",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "OrbitControls",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 24,
+          "modifierKind": [123]
+        },
+        {
+          "name": "cube",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "THREE.Mesh",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 19,
+          "modifierKind": [123]
+        },
+        {
+          "name": "isBoundingBoxSelected",
+          "defaultValue": "false",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "boolean",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 27
+        },
+        {
+          "name": "mouse",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "THREE.Vector2",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 23,
+          "modifierKind": [123]
+        },
+        {
+          "name": "raycaster",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "THREE.Raycaster",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 22,
+          "modifierKind": [123]
+        },
+        {
+          "name": "renderer",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "THREE.WebGLRenderer",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 18,
+          "modifierKind": [123]
+        },
+        {
+          "name": "rendererContainer",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "ElementRef",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 14,
+          "decorators": [
+            {
+              "name": "ViewChild",
+              "stringifiedArguments": "'rendererContainer', {static: true}"
+            }
+          ],
+          "modifierKind": [170]
+        },
+        {
+          "name": "scene",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "THREE.Scene",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 16,
+          "modifierKind": [123]
+        },
+        {
+          "name": "selectedBoundingBox",
+          "defaultValue": "null",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "THREE.LineSegments | null",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 25,
+          "modifierKind": [123]
+        },
+        {
+          "name": "transformControlsMap",
+          "defaultValue": "new Map()",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Map<THREE.LineSegments | TransformControls>",
+          "indexKey": "",
+          "optional": false,
+          "description": "",
+          "line": 21,
+          "modifierKind": [123]
+        }
+      ],
+      "methodsClass": [
+        {
+          "name": "addBoundingBox",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 183,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "animate",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 84,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "modifierKind": [123]
+        },
+        {
+          "name": "deselectBoundingBox",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 162,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "modifierKind": [123]
+        },
+        {
+          "name": "initScene",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 37,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "modifierKind": [123]
+        },
+        {
+          "name": "ngOnInit",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 31,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "onMouseDown",
+          "args": [
+            {
+              "name": "event",
+              "type": "MouseEvent",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 100,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "modifierKind": [123],
+          "jsdoctags": [
+            {
+              "name": "event",
+              "type": "MouseEvent",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        },
+        {
+          "name": "onMouseMove",
+          "args": [
+            {
+              "name": "event",
+              "type": "MouseEvent",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 121,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "modifierKind": [123],
+          "jsdoctags": [
+            {
+              "name": "event",
+              "type": "MouseEvent",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        },
+        {
+          "name": "onMouseWheel",
+          "args": [
+            {
+              "name": "event",
+              "type": "WheelEvent",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 131,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "modifierKind": [123],
+          "jsdoctags": [
+            {
+              "name": "event",
+              "type": "WheelEvent",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        },
+        {
+          "name": "onWindowResize",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 90,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "modifierKind": [123]
+        },
+        {
+          "name": "selectBoundingBox",
+          "args": [
+            {
+              "name": "boundingBox",
+              "type": "THREE.LineSegments",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 137,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "modifierKind": [123],
+          "jsdoctags": [
+            {
+              "name": "boundingBox",
+              "type": "THREE.LineSegments",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        },
+        {
+          "name": "setTransformMode",
+          "args": [
+            {
+              "name": "mode",
+              "type": "\"translate\" | \"rotate\" | \"scale\"",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 213,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "jsdoctags": [
+            {
+              "name": "mode",
+              "type": "\"translate\" | \"rotate\" | \"scale\"",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        }
+      ],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "hostBindings": [],
+      "hostListeners": [],
+      "standalone": false,
+      "imports": [
+        {
+          "name": "CommonModule",
+          "type": "module"
+        }
+      ],
+      "description": "",
+      "rawdescription": "\n",
+      "type": "component",
+      "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';\r\nimport * as THREE from 'three';\r\nimport { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';\r\nimport { TransformControls } from 'three/examples/jsm/controls/TransformControls';\r\n\r\n@Component({\r\n  selector: 'app-three-viewer',\r\n  templateUrl: './three-viewer.component.html',\r\n  styleUrls: ['./three-viewer.component.css'],\r\n  imports: [CommonModule],\r\n})\r\nexport class ThreeViewerComponent implements OnInit {\r\n  @ViewChild('rendererContainer', { static: true }) rendererContainer!: ElementRef;\r\n\r\n  private scene!: THREE.Scene;\r\n  private camera!: THREE.PerspectiveCamera;\r\n  private renderer!: THREE.WebGLRenderer;\r\n  private cube!: THREE.Mesh;\r\n  private boundingBoxes: THREE.LineSegments[] = [];\r\n  private transformControlsMap: Map<THREE.LineSegments, TransformControls> = new Map();\r\n  private raycaster!: THREE.Raycaster;\r\n  private mouse!: THREE.Vector2;\r\n  private controls!: OrbitControls;\r\n  private selectedBoundingBox: THREE.LineSegments | null = null;\r\n\r\n  isBoundingBoxSelected: boolean = false;\r\n\r\n  constructor(private el: ElementRef, private renderer2: Renderer2) { }\r\n\r\n  ngOnInit(): void {\r\n    this.initScene();\r\n    this.controls.update();\r\n    this.animate();\r\n  }\r\n\r\n  private initScene(): void {\r\n    const container = this.rendererContainer.nativeElement;\r\n\r\n    // Scene\r\n    this.scene = new THREE.Scene();\r\n    this.scene.background = new THREE.Color(0xaaaaaa);\r\n\r\n    // Camera\r\n    const aspectRatio = container.clientWidth / container.clientHeight;\r\n    this.camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);\r\n    this.camera.position.set(0, 2, 5);\r\n\r\n    // Renderer\r\n    this.renderer = new THREE.WebGLRenderer({ antialias: true });\r\n    this.renderer.setSize(container.clientWidth, container.clientHeight);\r\n    container.appendChild(this.renderer.domElement);\r\n\r\n    // Lights\r\n    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);\r\n    this.scene.add(ambientLight);\r\n\r\n    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);\r\n    directionalLight.position.set(5, 5, 5);\r\n    this.scene.add(directionalLight);\r\n\r\n    const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);\r\n    const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 });\r\n    this.cube = new THREE.Mesh(cubeGeometry, cubeMaterial);\r\n    this.scene.add(this.cube);\r\n\r\n    // OrbitControls\r\n    this.controls = new OrbitControls(this.camera, this.renderer.domElement);\r\n    this.controls.enableDamping = true;\r\n\r\n    // Raycaster and Mouse\r\n    this.raycaster = new THREE.Raycaster();\r\n    this.mouse = new THREE.Vector2();\r\n\r\n    // Event Listeners\r\n    container.addEventListener('mousedown', (event: any) => this.onMouseDown(event));\r\n    container.addEventListener('mousemove', (event: any) => this.onMouseMove(event));\r\n    container.addEventListener('wheel', (event: WheelEvent) => this.onMouseWheel(event));\r\n\r\n    // Resize Event\r\n    window.addEventListener('resize', () => this.onWindowResize());\r\n  }\r\n\r\n  private animate(): void {\r\n    requestAnimationFrame(() => this.animate());\r\n    this.controls.update();\r\n    this.renderer.render(this.scene, this.camera);\r\n  }\r\n\r\n  private onWindowResize(): void {\r\n    const container = this.rendererContainer.nativeElement;\r\n    const width = container.clientWidth;\r\n    const height = container.clientHeight;\r\n\r\n    this.camera.aspect = width / height;\r\n    this.camera.updateProjectionMatrix();\r\n    this.renderer.setSize(width, height);\r\n  }\r\n\r\n  private onMouseDown(event: MouseEvent): void {\r\n    const container = this.rendererContainer.nativeElement;\r\n    const rect = container.getBoundingClientRect();\r\n\r\n    this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;\r\n    this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;\r\n\r\n    this.raycaster.setFromCamera(this.mouse, this.camera);\r\n\r\n    for (let i = 0; i < this.boundingBoxes.length; i++) {\r\n      const intersects = this.raycaster.intersectObject(this.boundingBoxes[i]);\r\n      if (intersects.length > 0) {\r\n        this.selectBoundingBox(this.boundingBoxes[i]);\r\n        this.isBoundingBoxSelected = true;\r\n        return;\r\n      }\r\n    }\r\n\r\n    this.deselectBoundingBox();\r\n  }\r\n\r\n  private onMouseMove(event: MouseEvent): void {\r\n    const container = this.rendererContainer.nativeElement;\r\n    const rect = container.getBoundingClientRect();\r\n\r\n    this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;\r\n    this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;\r\n\r\n    this.raycaster.setFromCamera(this.mouse, this.camera);\r\n  }\r\n\r\n  private onMouseWheel(event: WheelEvent): void {\r\n    const zoomSpeed = 0.5;\r\n    this.camera.position.z += event.deltaY * zoomSpeed * 0.01;\r\n    this.camera.position.z = THREE.MathUtils.clamp(this.camera.position.z, 2, 20);\r\n  }\r\n\r\n  private selectBoundingBox(boundingBox: THREE.LineSegments): void {\r\n    if (this.selectedBoundingBox !== boundingBox) {\r\n      if (this.selectedBoundingBox) {\r\n        const prevTransformControls = this.transformControlsMap.get(this.selectedBoundingBox);\r\n        if (prevTransformControls) {\r\n          prevTransformControls.detach();\r\n          const helper = prevTransformControls.getHelper();\r\n          if (helper) {\r\n            helper.visible = false;\r\n          }\r\n        }\r\n      }\r\n\r\n      this.selectedBoundingBox = boundingBox;\r\n      const transformControls = this.transformControlsMap.get(boundingBox);\r\n      if (transformControls) {\r\n        transformControls.attach(boundingBox);\r\n        const helper = transformControls.getHelper();\r\n        if (helper) {\r\n          helper.visible = true;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  private deselectBoundingBox(): void {\r\n    if (this.selectedBoundingBox) {\r\n      const transformControls = this.transformControlsMap.get(this.selectedBoundingBox);\r\n      if (transformControls) {\r\n        transformControls.detach();\r\n        const helper = transformControls.getHelper();\r\n        if (helper) {\r\n          helper.visible = false;\r\n        }\r\n      }\r\n\r\n      // Re-enable OrbitControls\r\n      this.controls.enabled = true;\r\n\r\n      this.selectedBoundingBox = null;\r\n      this.isBoundingBoxSelected = false;\r\n    }\r\n  }\r\n\r\n\r\n  // Add a new bounding box to the scene\r\n  addBoundingBox(): void {\r\n    const boxGeometry = new THREE.BoxGeometry(1.2, 1.2, 1.2);\r\n    const edgesGeometry = new THREE.EdgesGeometry(boxGeometry);\r\n    const edgesMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });\r\n    const newBoundingBox = new THREE.LineSegments(edgesGeometry, edgesMaterial);\r\n\r\n    // Randomly position the bounding box\r\n    newBoundingBox.position.set(\r\n      Math.random() * 5 - 2.5,\r\n      Math.random() * 5 - 2.5,\r\n      Math.random() * 5 - 2.5\r\n    );\r\n    this.scene.add(newBoundingBox);\r\n    this.boundingBoxes.push(newBoundingBox);\r\n\r\n    // Initialize TransformControls for the bounding box\r\n    const newTransformControls = new TransformControls(this.camera, this.renderer.domElement);\r\n    newTransformControls.attach(newBoundingBox);\r\n    newTransformControls.addEventListener('change', () => {\r\n      this.renderer.render(this.scene, this.camera); // Re-render on change\r\n    });\r\n    newTransformControls.addEventListener('dragging-changed', (event) => {\r\n      this.controls.enabled = !event.value; // Enable/disable OrbitControls\r\n    });\r\n\r\n    this.scene.add(newTransformControls.getHelper());\r\n    this.transformControlsMap.set(newBoundingBox, newTransformControls);\r\n  }\r\n\r\n\r\n  setTransformMode(mode: 'translate' | 'rotate' | 'scale'): void {\r\n    console.log('Changing mode to:', mode);\r\n\r\n    if (this.selectedBoundingBox) {\r\n      const transformControls = this.transformControlsMap.get(this.selectedBoundingBox);\r\n      if (transformControls) {\r\n        transformControls.setMode(mode);\r\n        this.renderer.render(this.scene, this.camera); // Re-render the scene\r\n      }\r\n    }\r\n  }\r\n\r\n}\r\n",
+      "assetsDirs": [],
+      "styleUrlsData": [
+        {
+          "data": "/* three-viewer.component.css */\r\n\r\n.main-div{\r\ndisplay: flex;\r\njustify-content: center;\r\npadding: 30px;\r\n}\r\n  \r\n  #rendererContainer {\r\n    width: 100%;\r\n    height: 500px; /* Ensure the container has a height */\r\n    background-color: transparent;\r\n    border: 2px solid black;\r\n    border-radius: 10x;\r\n    margin: 0;\r\n    padding: 0;\r\n    overflow: hidden;\r\n    position: relative;\r\n  }\r\n\r\n\r\n.control-panel {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  background: rgba(255, 255, 255, 0.8);\r\n  padding: 10px;\r\n  border-radius: 5px;\r\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\r\n}\r\n\r\n.control-panel button {\r\n  margin: 5px;\r\n  padding: 5px 10px;\r\n  border: none;\r\n  background-color: #007bff;\r\n  color: white;\r\n  border-radius: 3px;\r\n  cursor: pointer;\r\n}\r\n\r\n.control-panel button:hover {\r\n  background-color: #0056b3;\r\n}",
+          "styleUrl": "./three-viewer.component.css"
+        }
+      ],
+      "stylesData": "",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "args": [
+          {
+            "name": "el",
+            "type": "ElementRef",
+            "deprecated": false,
+            "deprecationMessage": ""
+          },
+          {
+            "name": "renderer2",
+            "type": "Renderer2",
+            "deprecated": false,
+            "deprecationMessage": ""
+          }
+        ],
+        "line": 27,
+        "jsdoctags": [
+          {
+            "name": "el",
+            "type": "ElementRef",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          },
+          {
+            "name": "renderer2",
+            "type": "Renderer2",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          }
+        ]
+      },
+      "extends": [],
+      "implements": ["OnInit"],
+      "templateData": "<div class=\"main-div\">\r\n    @if(isBoundingBoxSelected){<div class=\"control-panel\">\r\n        <button (click)=\"setTransformMode('translate')\">Translate Bounding Box</button>\r\n        <button (click)=\"setTransformMode('rotate')\">Rotate Bounding Box</button>\r\n        <button (click)=\"setTransformMode('scale')\">Scale Bounding Box</button>\r\n      \r\n      </div>}\r\n      <div class=\"controls\">\r\n        <button (click)=\"addBoundingBox()\">Add Bounding Box</button>\r\n      </div>\r\n    <div #rendererContainer id=\"rendererContainer\" ></div>\r\n</div>"
+    }
+  ],
+  "modules": [
+    {
+      "name": "FeatureModule",
+      "id": "module-FeatureModule-5a6511d35f1998550ad355e98423e4054bdf2012f74114780e064525365ffd4bb95c97513badfa0807ba102ae8eabcb5780528e2f193cc8907089eeff581c8db",
+      "description": "",
+      "deprecationMessage": "",
+      "deprecated": false,
+      "file": "src/app/features/feature/feature.module.ts",
+      "methods": [],
+      "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FeatureRoutingModule } from './feature-routing.module';\r\n\r\n@NgModule({\r\n  imports: [\r\n    CommonModule,\r\n    FeatureRoutingModule, // Import the routing module\r\n  ],\r\n})\r\nexport class FeatureModule {}\r\n",
+      "children": [
+        {
+          "type": "providers",
+          "elements": []
+        },
+        {
+          "type": "declarations",
+          "elements": []
+        },
+        {
+          "type": "imports",
+          "elements": [
+            {
+              "name": "FeatureRoutingModule"
+            }
+          ]
+        },
+        {
+          "type": "exports",
+          "elements": []
+        },
+        {
+          "type": "bootstrap",
+          "elements": []
+        },
+        {
+          "type": "classes",
+          "elements": []
+        }
+      ]
+    },
+    {
+      "name": "FeatureRoutingModule",
+      "id": "module-FeatureRoutingModule-94ddd2cf4132c0a7019e6f2f209965e39454c78ac035cfe5882b96d8de921ce6276069d4874aefabbb3df1f438355a88719245cf4d0b4f1d542dd9ed271cf745",
+      "description": "",
+      "deprecationMessage": "",
+      "deprecated": false,
+      "file": "src/app/features/feature/feature-routing.module.ts",
+      "methods": [],
+      "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { RouterModule, Routes } from '@angular/router';\r\nimport { FeatureComponent } from './feature.component';\r\n\r\nconst routes: Routes = [\r\n  { path: '', component: FeatureComponent },\r\n];\r\n\r\n@NgModule({\r\n  imports: [\r\n    RouterModule.forChild(routes),\r\n    FeatureComponent,\r\n  ],\r\n  exports: [RouterModule],\r\n})\r\nexport class FeatureRoutingModule {}\r\n",
+      "children": [
+        {
+          "type": "providers",
+          "elements": []
+        },
+        {
+          "type": "declarations",
+          "elements": []
+        },
+        {
+          "type": "imports",
+          "elements": [
+            {
+              "name": "FeatureComponent"
+            }
+          ]
+        },
+        {
+          "type": "exports",
+          "elements": []
+        },
+        {
+          "type": "bootstrap",
+          "elements": []
+        },
+        {
+          "type": "classes",
+          "elements": []
+        }
+      ]
+    }
+  ],
+  "miscellaneous": [],
+  "routes": [],
+  "coverage": {
+    "count": 6,
+    "status": "low",
+    "files": [
+      {
+        "filePath": "src/app/about/about.component.ts",
+        "type": "component",
+        "linktype": "component",
+        "name": "AboutComponent",
+        "coveragePercent": 0,
+        "coverageCount": "0/3",
+        "status": "low"
+      },
+      {
+        "filePath": "src/app/app.component.ts",
+        "type": "component",
+        "linktype": "component",
+        "name": "AppComponent",
+        "coveragePercent": 0,
+        "coverageCount": "0/2",
+        "status": "low"
+      },
+      {
+        "filePath": "src/app/features/feature/feature.component.ts",
+        "type": "component",
+        "linktype": "component",
+        "name": "FeatureComponent",
+        "coveragePercent": 0,
+        "coverageCount": "0/3",
+        "status": "low"
+      },
+      {
+        "filePath": "src/app/home/home.component.ts",
+        "type": "component",
+        "linktype": "component",
+        "name": "HomeComponent",
+        "coveragePercent": 0,
+        "coverageCount": "0/7",
+        "status": "low"
+      },
+      {
+        "filePath": "src/app/pipes/custom-uppercase.pipe.ts",
+        "type": "pipe",
+        "linktype": "pipe",
+        "name": "CustomUppercasePipe",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/app/service-example/service-example.component.ts",
+        "type": "component",
+        "linktype": "component",
+        "name": "ServiceExampleComponent",
+        "coveragePercent": 0,
+        "coverageCount": "0/4",
+        "status": "low"
+      },
+      {
+        "filePath": "src/app/services/data.service.ts",
+        "type": "injectable",
+        "linktype": "injectable",
+        "name": "DataService",
+        "coveragePercent": 0,
+        "coverageCount": "0/4",
+        "status": "low"
+      },
+      {
+        "filePath": "src/app/three-viewer/three-viewer.component.ts",
+        "type": "component",
+        "linktype": "component",
+        "name": "ThreeViewerComponent",
+        "coveragePercent": 0,
+        "coverageCount": "0/25",
+        "status": "low"
+      },
+      {
+        "filePath": "src/stories/button.component.ts",
+        "type": "component",
+        "linktype": "component",
+        "name": "ButtonComponent",
+        "coveragePercent": 83,
+        "coverageCount": "5/6",
+        "status": "very-good"
+      },
+      {
+        "filePath": "src/stories/header.component.ts",
+        "type": "component",
+        "linktype": "component",
+        "name": "HeaderComponent",
+        "coveragePercent": 0,
+        "coverageCount": "0/5",
+        "status": "low"
+      },
+      {
+        "filePath": "src/stories/page.component.ts",
+        "type": "component",
+        "linktype": "component",
+        "name": "PageComponent",
+        "coveragePercent": 0,
+        "coverageCount": "0/5",
+        "status": "low"
+      },
+      {
+        "filePath": "src/stories/user.ts",
+        "type": "interface",
+        "linktype": "interface",
+        "name": "User",
+        "coveragePercent": 0,
+        "coverageCount": "0/2",
+        "status": "low"
+      }
+    ]
+  }
+}

@@ -1,23 +1,22 @@
 /* three-viewer.component.css */
 
-.main-div{
-display: flex;
-justify-content: center;
-padding: 30px;
+.main-div {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
 }
-  
-  #rendererContainer {
-    width: 100%;
-    height: 500px; /* Ensure the container has a height */
-    background-color: transparent;
-    border: 2px solid black;
-    border-radius: 10x;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    position: relative;
-  }
 
+#rendererContainer {
+  width: 100%;
+  height: 550px; /* Ensure the container has a height */
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 10x;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
 
 .control-panel {
   position: absolute;

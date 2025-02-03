@@ -1,0 +1,37 @@
+export const ModelConfig = {
+  centerObjZoomFactor: 0.5,
+  pointSizeChangeFactor: 0.2,
+  defaultPointSize: 1,
+  minimumPointSize: 0,
+};
+
+export const CANVAS_MODEL_TYPES = {
+  THREE_D_MESH: '3d',
+  THREE_D_POINT_CLOUD: 'point-cloud',
+};
+
+export const CANVAS_VIEWER = {
+  SCENE_BG: 0x14171f,
+  SCENE_FOG_COLOR: 0x050505,
+  AMBIENT_LIGHT_COLOR: 0xffffff,
+  CUBOID_DEFAULT_COLOR: '#FF33CC',
+  CAMERA_SIZING_FACTOR: 100,
+  CUBOID_BORDER_COLOR: 0xfff000,
+  CUBOID_DEFAULT_SIZING: 1,
+  CUBOID_DEFAULT_SEGEMENT: 1, //this value doesnt matter unless we are using custom shaders. Adversely impacts the performance. (note: the shattering happens on min value 1 to avoid balance value given)
+  CUBOID_DEFAULT_MANUAL_NAME: 'ANT_',
+  REFERENCE_MARKER_COLOR: 0xffff00,
+  REFERENCE_POLYGON_COLOR: 0xffff00,
+  MEASUREMENT_COLOR: 0x00f0ff,
+  MEASUREMENT_COLOR_LABEL_TEXT_HEX: '#00F0FF',
+  MEASUREMENT_COLOR_LABEL_BG_HEX: '#24262B',
+  MEASUREMENT_COLOR_LABEL_BORDER_HEX: '#4E5B6D',
+  REFERENCE_OFFSET: 0.05,
+  BOUNDARY_WIDTH_DEFAULT: 1,
+  BOUNDARY_WIDTH_SELECTED: 6,
+  RAYCAST_THRESHOLD: 0.07, // Default: 1, 0.07 suitable for mesh and point-cloud
+  AUTO_SAVE_INTERVAL: 300000, // 5 minutes
+};
+
+export const MODEL_URL =
+  'https://dronos-telco-tpm-audit-65d6f93ac19ed972470b12db.s3.ap-southeast-1.amazonaws.com/mission-66138221b88124db892b8719/meshNxz/fc4eca68-45cf-4a59-a2ac-99b3b8b224fd_2024-04-08-08-46-44.nxs?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAX4QGSDYOX6EQFPUO%2F20250203%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20250203T131840Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEP3%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLXNvdXRoZWFzdC0xIkYwRAIgI6qOOzI6tprJzJ3jHTCck%2BMEVT%2FK2amfAU87bvKHZxoCIGGPKw%2BTN37GAh%2B3w2AR5iQeu%2BeLVmfS3frG74mmvDpqKqAFCBYQABoMNTQyMjUzMzkxMzg5IgyXTurbNOmH9dOmvdgq%2FQR8xK6XnVLNceqvnhs9ny%2Fz9s2mfZq54ilbxur7mtsw8a9v%2FljA47rpy756Co%2FO5%2F0VNJAaW1C9%2F08ycZ57HOYNCvSLTrcULY20WgpwJAywKW%2FcxbPuQMhZrD6T4OY4r9eiFXyHyeZZwTw%2Fm1fg8Af%2B2EiF0GYZZxCOAglLPsHSSNNPrVBAcVRjCTqPjsIJaqmIaZFBoeOzvyqFIw1Ia9mC7GQF9ssK6kX2OmP%2Fp0AuDVPbFzRTDGFfSNholwetL%2FLemPoBwaj26XRntTfnjcEYjVdkqCwjr3Qz5LvxgSl4YRkdQRX9Z%2FxGwuS0Uh7iL%2F%2FQ%2FkDwgZZAMAKvTNCcVYArnPOexDvwLaCnUJYfyTkL4qEaEsz3Du2NcfuVDSFnKwHHbs8sGAcGb9jIPtL0v8WRZ2bjaHhK9ZIkHXyR6u5FM3wi5TWp7sF8VLY3qZXltEixPgFbJ2PFnAoLvllLRhdUgcyIU2ozsUhgXCl25Fo50NcsbLtX9aVX%2FDMxvXjSiE3m7bLhDc%2FvNf3tomwyRLE8aXSw6bMr%2Fv8jXqcw0F3oE5eGTzlvg4h8MJQotmV%2Bhleht0WcmCUI%2BIoG5gxguE85cUfpAJSX1qxF5IXDpZ1y0kIa3o1LiJWSWITE2lQDfmDnU7vNAvARdbD3iDapg6EvM9xwCafGzZsl7DnKp%2BEV9qEDnLd02lXfwSwuLiF4sddJaZTfh6GVhlXbCFXL0%2F%2BgwalxsgR0vl0OWpIYKmyI0uDd5q2Gr%2FiQhHwTj8AcDX8D39DYWLeojMp21hSvid4mWQpbZBEIqPGlT6Ph38rPUT0S%2F5aZvnC7t7hV%2FwsqMLo5FqUL3dKQEsv3bLXNMLCEg70GOpwBifcsKD5jJcMIlA49n5K3ZXRLOm8FHyQM174rlv9WVpfZjDGZlMCIOg4MdTgWGcemGaubTkFDzcDmxHWEVfjoBjVUEhNEfMzINsrGTdILhDQRUc1KF2aV5k6tOvNualB6FcpWCt%2FsPtpYDcJUDbjQ8jxKwFinc9bXjg8bxat10I4vJau45xWcqkqyoT9SnS2n4wVCVwUJ3fo5kxBe&X-Amz-Signature=968a900007ea1ea27d4b2504b0bb8bfe4f8dc9ad36d6dfac060012612b9bdfdc&X-Amz-SignedHeaders=host&x-id=GetObject';

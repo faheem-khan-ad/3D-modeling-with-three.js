@@ -1,26 +1,26 @@
 nav {
-    display: flex;
-    justify-content: center;
-    margin-top: 5rem;
-  }
- nav > a {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+nav > a {
   margin-right: 4rem;
   cursor: pointer;
- }
+}
 .nav-item {
-    text-decoration: none;
-    border: 1px solid black;
-    border-radius: 8px;
-    padding: 5px 10px;
-    color: black;
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 5px 10px;
+  color: black;
 }
 
 .active-nav {
-    background-color: blue;
-    color: white;
-    font-weight: 500;
-    text-decoration: none;
-    border: 1px solid black;
-    border-radius: 8px;
-    padding: 5px 10px;
+  background-color: blue;
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 5px 10px;
 }

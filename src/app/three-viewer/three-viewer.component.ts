@@ -1,225 +1,287 @@
-import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+import { CommonModule } from '@angular/common';
+import { ControlsService } from '../services/controls.service';
+import { SceneService } from '../services/camera-scene.service';
+import { PotreeViewer } from '../services/potree-viewer.service';
+import { ModelLoaderService } from '../services/model-loader.service';
+import { InteractionService } from '../services/interaction.service';
+import { ScriptLoaderService } from '../services/script-loader.service';
+import { CANVAS_MODEL_TYPES, MODEL_URL, ModelConfig } from '../constants';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { TransformControls } from 'three/examples/jsm/controls/TransformControls.js';
+import {
+  Component,
+  ElementRef,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-three-viewer',
   templateUrl: './three-viewer.component.html',
   styleUrls: ['./three-viewer.component.css'],
   imports: [CommonModule],
+  providers: [
+    InteractionService,
+    SceneService,
+    ControlsService,
+    ModelLoaderService,
+  ],
 })
-export class ThreeViewerComponent implements OnInit {
-  @ViewChild('rendererContainer', { static: true }) rendererContainer!: ElementRef;
+export class ThreeViewerComponent implements OnInit, OnDestroy {
+  @ViewChild('rendererContainer', { static: true })
+  rendererContainer!: ElementRef;
 
-  private scene!: THREE.Scene;
-  private camera!: THREE.PerspectiveCamera;
-  private renderer!: THREE.WebGLRenderer;
-  private cube!: THREE.Mesh;
   private boundingBoxes: THREE.LineSegments[] = [];
-  private transformControlsMap: Map<THREE.LineSegments, TransformControls> = new Map();
-  private raycaster!: THREE.Raycaster;
-  private mouse!: THREE.Vector2;
-  private controls!: OrbitControls;
   private selectedBoundingBox: THREE.LineSegments | null = null;
+  private nexusObjectGroup!: THREE.Group;
+  private transformObj!: TransformControls;
+  private interactObject!: THREE.Object3D;
+  private controls!: OrbitControls;
+  private animationId!: number;
+  private objModel!: THREE.Object3D;
+  isBoundingBoxSelected = false;
+  loadedScriptRef: any[] = [];
+  externalJSFiles: string[] = ['js/nexus/nexus.js', 'js/nexus/nexus_three.js'];
 
-  isBoundingBoxSelected: boolean = false;
-
-  constructor(private el: ElementRef, private renderer2: Renderer2) { }
+  constructor(
+    private ngZone: NgZone,
+    private sceneService: SceneService,
+    private controlsService: ControlsService,
+    private modelLoader: ModelLoaderService,
+    private interactionService: InteractionService,
+    private potreeService: PotreeViewer,
+    private scriptLoaderService: ScriptLoaderService,
+    private cameraScene: SceneService,
+  ) {}
 
   ngOnInit(): void {
-    this.initScene();
-    this.controls.update();
-    this.animate();
+    this.ngZone.runOutsideAngular(() => {
+      this.loadScripts();
+    });
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('resize', () => this.handleResize());
+    this.scriptLoaderService.unloadScripts(this.loadedScriptRef);
+    cancelAnimationFrame(this.animationId);
+    this.controlsService.disposeAllControls();
   }
 
   private initScene(): void {
+    this.sceneService.initializeScene(this.rendererContainer);
+    this.controls = this.controlsService.initializeOrbitControls();
+    this.setupEventListeners();
+    this.loadModels();
+    this.animate();
+  }
+
+  private loadModels(): void {
+    this.loadOBJModel('assets/APXBL06B_43-CT5.obj');
+    this.loadModelFiles([MODEL_URL]);
+  }
+
+  private setupEventListeners(): void {
     const container = this.rendererContainer.nativeElement;
 
-    // Scene
-    this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0xaaaaaa);
+    container.addEventListener('mousedown', (event: MouseEvent) =>
+      this.handleMouseDown(event),
+    );
+    container.addEventListener('mousemove', (event: MouseEvent) =>
+      this.interactionService.handleMouseMove(event, this.rendererContainer),
+    );
+    container.addEventListener('wheel', (event: WheelEvent) =>
+      this.handleMouseWheel(event),
+    );
+    container.addEventListener('dblclick', (event: MouseEvent) =>
+      this.deselectBoundingBox(),
+    );
 
-    // Camera
-    const aspectRatio = container.clientWidth / container.clientHeight;
-    this.camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
-    this.camera.position.set(0, 2, 5);
+    window.addEventListener('resize', () => this.handleResize());
+    document.addEventListener('keydown', (event) => this.handleKeyDown(event));
+  }
 
-    // Renderer
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.renderer.setSize(container.clientWidth, container.clientHeight);
-    container.appendChild(this.renderer.domElement);
+  private handleResize(): void {
+    this.sceneService.handleResize(this.rendererContainer);
+  }
 
-    // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-    this.scene.add(ambientLight);
+  private handleMouseDown(event: MouseEvent): void {
+    const intersects = this.interactionService.handleMouseDown(
+      event,
+      this.rendererContainer,
+    );
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(5, 5, 5);
-    this.scene.add(directionalLight);
+    for (const intersect of intersects) {
+      let currentObj: THREE.Object3D | null = intersect.object;
+      // Traverse parent hierarchy to find bounding box
+      while (currentObj) {
+        const boundingBox = this.boundingBoxes.find((bb) => bb === currentObj);
+        if (boundingBox) {
+          this.selectBoundingBox(boundingBox);
+          this.isBoundingBoxSelected = true;
+          this.selectedBoundingBox = boundingBox;
+          return;
+        }
+        currentObj = currentObj.parent ?? null;
+      }
+    }
+  }
 
-    const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-    const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
-    this.cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    this.scene.add(this.cube);
-
-    // OrbitControls
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.controls.enableDamping = true;
-
-    // Raycaster and Mouse
-    this.raycaster = new THREE.Raycaster();
-    this.mouse = new THREE.Vector2();
-
-    // Event Listeners
-    container.addEventListener('mousedown', (event: any) => this.onMouseDown(event));
-    container.addEventListener('mousemove', (event: any) => this.onMouseMove(event));
-    container.addEventListener('wheel', (event: WheelEvent) => this.onMouseWheel(event));
-
-    // Resize Event
-    window.addEventListener('resize', () => this.onWindowResize());
+  private handleMouseWheel(event: WheelEvent): void {
+    const zoomSpeed = 0.5;
+    this.sceneService.camera.position.z += event.deltaY * zoomSpeed * 0.01;
+    this.sceneService.camera.position.z = THREE.MathUtils.clamp(
+      this.sceneService.camera.position.z,
+      2,
+      20,
+    );
   }
 
   private animate(): void {
-    requestAnimationFrame(() => this.animate());
+    this.animationId = requestAnimationFrame(() => this.animate());
     this.controls.update();
-    this.renderer.render(this.scene, this.camera);
+    this.sceneService.render();
   }
 
-  private onWindowResize(): void {
-    const container = this.rendererContainer.nativeElement;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
-
-    this.camera.aspect = width / height;
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(width, height);
-  }
-
-  private onMouseDown(event: MouseEvent): void {
-    const container = this.rendererContainer.nativeElement;
-    const rect = container.getBoundingClientRect();
-
-    this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-    this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
-    this.raycaster.setFromCamera(this.mouse, this.camera);
-
-    for (let i = 0; i < this.boundingBoxes.length; i++) {
-      const intersects = this.raycaster.intersectObject(this.boundingBoxes[i]);
-      if (intersects.length > 0) {
-        this.selectBoundingBox(this.boundingBoxes[i]);
-        this.isBoundingBoxSelected = true;
-        return;
-      }
+  private handleKeyDown(event: KeyboardEvent): void {
+    if (!this.objModel) return;
+    switch (event.key.toLowerCase()) {
+      case 't':
+        this.controlsService.setTransformMode(this.objModel, 'translate');
+        break;
+      case 'r':
+        this.controlsService.setTransformMode(this.objModel, 'rotate');
+        break;
+      case 's':
+        this.controlsService.setTransformMode(this.objModel, 'scale');
+        break;
+      case 'q':
+        this.controlsService.hideTransformHelpers();
+        break;
+      case 'w':
+        this.controlsService.showTransformHelperForModel(this.objModel);
+        break;
     }
-
-    this.deselectBoundingBox();
   }
 
-  private onMouseMove(event: MouseEvent): void {
-    const container = this.rendererContainer.nativeElement;
-    const rect = container.getBoundingClientRect();
-
-    this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-    this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
-    this.raycaster.setFromCamera(this.mouse, this.camera);
+  updateTransformMode(mode: 'translate' | 'rotate' | 'scale'): void {
+    this.controlsService.setTransformMode(
+      this.selectedBoundingBox as THREE.Object3D,
+      mode,
+    );
   }
 
-  private onMouseWheel(event: WheelEvent): void {
-    const zoomSpeed = 0.5;
-    this.camera.position.z += event.deltaY * zoomSpeed * 0.01;
-    this.camera.position.z = THREE.MathUtils.clamp(this.camera.position.z, 2, 20);
+  private loadOBJModel(url: string): void {
+    this.modelLoader
+      .loadOBJModel(url)
+      .then((object) => {
+        this.objModel = object;
+        this.transformObj =
+          this.controlsService.createTransformControls(object);
+
+        this.setupTransformControls();
+      })
+      .catch((error) => {
+        console.error('Error loading OBJ model:', error);
+      });
   }
 
-  private selectBoundingBox(boundingBox: THREE.LineSegments): void {
-    if (this.selectedBoundingBox !== boundingBox) {
-      if (this.selectedBoundingBox) {
-        const prevTransformControls = this.transformControlsMap.get(this.selectedBoundingBox);
-        if (prevTransformControls) {
-          prevTransformControls.detach();
-          const helper = prevTransformControls.getHelper();
-          if (helper) {
-            helper.visible = false;
-          }
-        }
-      }
+  private setupTransformControls(): void {
+    this.transformObj.addEventListener('mouseDown', () => {
+      this.controlsService.disableOrbitControls();
+    });
 
-      this.selectedBoundingBox = boundingBox;
-      const transformControls = this.transformControlsMap.get(boundingBox);
-      if (transformControls) {
-        transformControls.attach(boundingBox);
-        const helper = transformControls.getHelper();
-        if (helper) {
-          helper.visible = true;
-        }
-      }
-    }
+    this.transformObj.addEventListener('mouseUp', () => {
+      this.controlsService.enableOrbitControls();
+    });
+  }
+
+  addBoundingBox(): void {
+    const boundingBox = this.sceneService.createBoundingBox();
+    this.boundingBoxes.push(boundingBox);
+    this.sceneService.addObjectToScene(boundingBox);
+    this.controlsService.createTransformControls(boundingBox);
+  }
+
+  private selectBoundingBox(boundingBox: THREE.Object3D): void {
+    this.controlsService.selectBoundingBox(boundingBox);
+    this.isBoundingBoxSelected = true;
   }
 
   private deselectBoundingBox(): void {
-    if (this.selectedBoundingBox) {
-      const transformControls = this.transformControlsMap.get(this.selectedBoundingBox);
-      if (transformControls) {
-        transformControls.detach();
-        const helper = transformControls.getHelper();
-        if (helper) {
-          helper.visible = false;
-        }
-      }
-
-      // Re-enable OrbitControls
-      this.controls.enabled = true;
-
-      this.selectedBoundingBox = null;
-      this.isBoundingBoxSelected = false;
-    }
+    this.controlsService.deselectBoundingBox();
+    this.isBoundingBoxSelected = false;
   }
 
+  private loadModelFiles(files: string[]): void {
+    const modelType = '3d';
+    this.nexusObjectGroup = new THREE.Group();
 
-  // Add a new bounding box to the scene
-  addBoundingBox(): void {
-    const boxGeometry = new THREE.BoxGeometry(1.2, 1.2, 1.2);
-    const edgesGeometry = new THREE.EdgesGeometry(boxGeometry);
-    const edgesMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
-    const newBoundingBox = new THREE.LineSegments(edgesGeometry, edgesMaterial);
+    if (modelType === CANVAS_MODEL_TYPES.THREE_D_POINT_CLOUD) {
+      this.loadPointCloud(files);
+    } else {
+      this.loadNexusModels(files);
+    }
 
-    // Randomly position the bounding box
-    newBoundingBox.position.set(
-      Math.random() * 5 - 2.5,
-      Math.random() * 5 - 2.5,
-      Math.random() * 5 - 2.5
+    this.sceneService.addObjectToScene(this.nexusObjectGroup);
+  }
+
+  private loadPointCloud(files: string[]): void {
+    const potreeDataUrls = this.potreeService.labelUrl(files);
+    this.potreeService.loadData(potreeDataUrls).then((pco) => {
+      this.sceneService.addObjectToScene(pco);
+      this.nexusObjectGroup.add(pco);
+      this.centerObject(true);
+    });
+  }
+
+  private loadNexusModels(files: string[]): void {
+    let loadedObjects: THREE.Object3D[] = [];
+
+    files.forEach((file) => {
+      // @ts-ignore - NexusObject implementation
+      new NexusObject(
+        file,
+        (o: THREE.Object3D) => {
+          const bbox = new THREE.Box3().setFromObject(o);
+          const center = bbox.getCenter(new THREE.Vector3());
+          o.position.sub(center);
+          loadedObjects.push(o);
+
+          if (loadedObjects.length === files.length) {
+            loadedObjects.forEach((obj) => this.nexusObjectGroup.add(obj));
+            this.centerObject();
+          }
+        },
+        () => {},
+        this.cameraScene.renderer,
+        false,
+      );
+    });
+  }
+
+  private centerObject(isPcoLoad: boolean = false): void {
+    this.sceneService.centerObject(
+      this.nexusObjectGroup,
+      ModelConfig.centerObjZoomFactor,
+      isPcoLoad,
     );
-    this.scene.add(newBoundingBox);
-    this.boundingBoxes.push(newBoundingBox);
-
-    // Initialize TransformControls for the bounding box
-    const newTransformControls = new TransformControls(this.camera, this.renderer.domElement);
-    newTransformControls.attach(newBoundingBox);
-    newTransformControls.addEventListener('change', () => {
-      this.renderer.render(this.scene, this.camera); // Re-render on change
-    });
-    newTransformControls.addEventListener('dragging-changed', (event) => {
-      this.controls.enabled = !event.value; // Enable/disable OrbitControls
-    });
-
-    this.scene.add(newTransformControls.getHelper());
-    this.transformControlsMap.set(newBoundingBox, newTransformControls);
   }
 
-
-  setTransformMode(mode: 'translate' | 'rotate' | 'scale'): void {
-    console.log('Changing mode to:', mode);
-
-    if (this.selectedBoundingBox) {
-      const transformControls = this.transformControlsMap.get(this.selectedBoundingBox);
-      if (transformControls) {
-        transformControls.setMode(mode);
-        this.renderer.render(this.scene, this.camera); // Re-render the scene
-      }
-    }
+  // Load the scripts requried
+  loadScripts() {
+    //@ts-ignore
+    window['THREE'] = THREE;
+    this.scriptLoaderService.loadScripts(
+      this.externalJSFiles,
+      (loadedScripts: any) => {
+        this.loadedScriptRef = loadedScripts;
+        this.initScene();
+        this.controls.update();
+        this.animate();
+      },
+    );
   }
-
 }

@@ -5,16 +5,12 @@ import { Router } from '@angular/router';
   selector: 'app-feature',
   imports: [],
   templateUrl: './feature.component.html',
-  styleUrl: './feature.component.css'
+  styleUrl: './feature.component.css',
 })
 export class FeatureComponent {
+  constructor(private router: Router) {}
 
-  constructor(private router: Router){
-
+  backToHome() {
+    this.router.navigateByUrl('/');
   }
-
-  backToHome () {
-    this.router.navigateByUrl('/')
-  }
-
 }

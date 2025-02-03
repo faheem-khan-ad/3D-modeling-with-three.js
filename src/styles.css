@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 button {
-    background-color: blue;
-    padding: 10px;
-    border: 2px solid white;
-    border-radius: 8px;
-    color: antiquewhite;
-    cursor: pointer;
+  background-color: blue;
+  padding: 10px;
+  border: 2px solid white;
+  border-radius: 8px;
+  color: antiquewhite;
+  cursor: pointer;
 }

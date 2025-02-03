@@ -1,24 +1,25 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
 export class HomeComponent {
   divColor: string = 'red';
   isDivPresent: boolean = true;
-  name: string = ""
+  name: string = '';
 
   toggleColor() {
     this.divColor = this.divColor === 'red' ? 'green' : 'red';
   }
   showDiv() {
-    this.isDivPresent = true
+    this.isDivPresent = true;
   }
   hideDiv() {
-    this.isDivPresent = false
+    this.isDivPresent = false;
   }
 }

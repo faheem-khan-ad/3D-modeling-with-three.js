@@ -15,7 +15,7 @@ export class ServiceExampleComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.getPosts().subscribe((data) => {
-      this.posts = data.slice(0, 15); 
+      this.posts = data.slice(0, 15);
     });
   }
 }

@@ -7,6 +7,10 @@ export const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'services', component: ServiceExampleComponent },
-  { path: 'feature', loadChildren: () => import('./features/feature/feature.module').then(m => m.FeatureModule) },
+  {
+    path: 'feature',
+    loadChildren: () =>
+      import('./features/feature/feature.module').then((m) => m.FeatureModule),
+  },
   { path: '**', redirectTo: '' }, // Wildcard route for 404
 ];
