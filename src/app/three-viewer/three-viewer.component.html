@@ -1,17 +1,19 @@
 <div class="main-div">
   @if (isBoundingBoxSelected) {
-    <div class="control-panel">
-      <button (click)="updateTransformMode('translate')">
-        Translate Bounding Box
-      </button>
-      <button (click)="updateTransformMode('rotate')">
-        Rotate Bounding Box
-      </button>
-      <button (click)="updateTransformMode('scale')">Scale Bounding Box</button>
-    </div>
+  <div class="control-panel">
+    <button (click)="updateTransformMode('translate')">
+      Translate Bounding Box
+    </button>
+    <button (click)="updateTransformMode('rotate')">
+      Rotate Bounding Box
+    </button>
+    <button (click)="updateTransformMode('scale')">Scale Bounding Box</button>
+  </div>
   }
   <div class="controls">
-    <button class="add-box" (click)="addBoundingBox()">Add Bounding Box</button>
+    <button class="add-box" [ngClass]="{'red': isAddingCube}" (click)="toogleAddButton()">
+      {{ !isAddingCube ? 'Add bounding box' :'double click to drop'}}
+    </button>
   </div>
   <div #rendererContainer id="rendererContainer"></div>
 </div>

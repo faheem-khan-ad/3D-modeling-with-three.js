@@ -10,6 +10,7 @@ import { CANVAS_MODEL_TYPES, MODEL_URL, ModelConfig } from '../constants';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls.js';
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   NgZone,
@@ -38,13 +39,14 @@ export class ThreeViewerComponent implements OnInit, OnDestroy {
   private selectedBoundingBox: THREE.LineSegments | null = null;
   private nexusObjectGroup!: THREE.Group;
   private transformObj!: TransformControls;
-  private interactObject!: THREE.Object3D;
   private controls!: OrbitControls;
   private animationId!: number;
   private objModel!: THREE.Object3D;
-  isBoundingBoxSelected = false;
+  raycaster: THREE.Raycaster = new THREE.Raycaster();
+  public isBoundingBoxSelected: boolean = false;
   loadedScriptRef: any[] = [];
   externalJSFiles: string[] = ['js/nexus/nexus.js', 'js/nexus/nexus_three.js'];
+  isAddingCube: boolean = false;
 
   constructor(
     private ngZone: NgZone,
@@ -55,7 +57,8 @@ export class ThreeViewerComponent implements OnInit, OnDestroy {
     private potreeService: PotreeViewer,
     private scriptLoaderService: ScriptLoaderService,
     private cameraScene: SceneService,
-  ) {}
+    private cdr: ChangeDetectorRef,
+  ) { }
 
   ngOnInit(): void {
     this.ngZone.runOutsideAngular(() => {
@@ -79,8 +82,8 @@ export class ThreeViewerComponent implements OnInit, OnDestroy {
   }
 
   private loadModels(): void {
-    this.loadOBJModel('assets/APXBL06B_43-CT5.obj');
     this.loadModelFiles([MODEL_URL]);
+    this.loadOBJModel('assets/APXBL06B_43-CT5.obj');
   }
 
   private setupEventListeners(): void {
@@ -96,7 +99,7 @@ export class ThreeViewerComponent implements OnInit, OnDestroy {
       this.handleMouseWheel(event),
     );
     container.addEventListener('dblclick', (event: MouseEvent) =>
-      this.deselectBoundingBox(),
+      this.handleDoubleClick(event)
     );
 
     window.addEventListener('resize', () => this.handleResize());
@@ -126,6 +129,19 @@ export class ThreeViewerComponent implements OnInit, OnDestroy {
         }
         currentObj = currentObj.parent ?? null;
       }
+    }
+  }
+
+  private handleDoubleClick(event: MouseEvent): void {
+    if (this.isAddingCube) {
+      const intersectionPoint = this.get3dPosition(event)
+      if(intersectionPoint){
+        this.addBoundingBox(intersectionPoint as THREE.Vector3);
+      }
+    } else {
+      this.isBoundingBoxSelected = false;
+      this.controlsService.deselectBoundingBox();
+      this.cdr.detectChanges();
     }
   }
 
@@ -198,22 +214,23 @@ export class ThreeViewerComponent implements OnInit, OnDestroy {
     });
   }
 
-  addBoundingBox(): void {
-    const boundingBox = this.sceneService.createBoundingBox();
+  addBoundingBox(position: THREE.Vector3): void {
+    const boundingBox = this.sceneService.createBoundingBox(2, position);
     this.boundingBoxes.push(boundingBox);
     this.sceneService.addObjectToScene(boundingBox);
     this.controlsService.createTransformControls(boundingBox);
   }
 
-  private selectBoundingBox(boundingBox: THREE.Object3D): void {
-    this.controlsService.selectBoundingBox(boundingBox);
-    this.isBoundingBoxSelected = true;
+  toogleAddButton(): void {
+    this.isAddingCube = !this.isAddingCube
   }
 
-  private deselectBoundingBox(): void {
-    this.controlsService.deselectBoundingBox();
-    this.isBoundingBoxSelected = false;
+  private selectBoundingBox(boundingBox: THREE.Object3D): void {
+    this.isBoundingBoxSelected = true;
+    this.controlsService.selectBoundingBox(boundingBox);
+    this.cdr.detectChanges();
   }
+
 
   private loadModelFiles(files: string[]): void {
     const modelType = '3d';
@@ -255,7 +272,7 @@ export class ThreeViewerComponent implements OnInit, OnDestroy {
             this.centerObject();
           }
         },
-        () => {},
+        () => { },
         this.cameraScene.renderer,
         false,
       );
@@ -284,4 +301,26 @@ export class ThreeViewerComponent implements OnInit, OnDestroy {
       },
     );
   }
+
+  get3dPosition(event: MouseEvent): THREE.Vector3 | false {
+    const canvas = this.sceneService.renderer.domElement;
+    const rect = canvas.getBoundingClientRect();
+
+    const mouse = new THREE.Vector2(
+      ((event.clientX - rect.left) / rect.width) * 2 - 1,
+      -((event.clientY - rect.top) / rect.height) * 2 + 1
+    );
+
+    this.raycaster.setFromCamera(mouse, this.sceneService.camera);
+
+    const intersects = this.raycaster.intersectObjects(this.nexusObjectGroup.children, true);
+
+    if (intersects.length === 0) {
+      return false;
+    }
+
+    return intersects[0].point;
+  }
+
+
 }

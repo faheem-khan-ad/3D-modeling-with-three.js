@@ -11,7 +11,7 @@ export class ControlsService {
     new Map();
   private currentTransformTarget: THREE.Object3D | null = null;
 
-  constructor(private sceneService: SceneService) {}
+  constructor(private sceneService: SceneService) { }
 
   initializeOrbitControls(): OrbitControls {
     this.orbitControls = new OrbitControls(
@@ -48,8 +48,12 @@ export class ControlsService {
       this.sceneService.renderer.domElement,
     );
 
-    this.sceneService.scene.add(transformControls as unknown as THREE.Object3D);
     transformControls.attach(target);
+    const helper = transformControls.getHelper()
+    if (helper) {
+      this.sceneService.scene.add(helper)
+      helper.visible = false
+    }
 
     this.transformControlsMap.set(target, transformControls);
 
@@ -82,9 +86,10 @@ export class ControlsService {
     const transformControls = this.transformControlsMap.get(boundingBox);
     if (transformControls) {
       transformControls.attach(boundingBox);
-      this.sceneService.scene.add(
-        transformControls as unknown as THREE.Object3D,
-      );
+      const helper = transformControls.getHelper()
+      if (helper) {
+        this.sceneService.scene.add(helper)
+      }
       this.currentTransformTarget = boundingBox;
     }
   }
@@ -96,9 +101,10 @@ export class ControlsService {
       );
       if (transformControls) {
         transformControls.detach();
-        this.sceneService.scene.remove(
-          transformControls as unknown as THREE.Object3D,
-        );
+        const helper = transformControls.getHelper()
+        if (helper) {
+          helper.visible = false
+        }
       }
       this.currentTransformTarget = null;
       this.orbitControls.enabled = true; // Re-enable orbit controls
@@ -107,7 +113,10 @@ export class ControlsService {
 
   hideTransformHelpers(): void {
     this.transformControlsMap.forEach((controls) => {
-      this.sceneService.scene.remove(controls as unknown as THREE.Object3D);
+      const helper = controls.getHelper()
+      if (helper) {
+        helper.visible = false
+      }
     });
   }
 
@@ -117,13 +126,20 @@ export class ControlsService {
       console.warn('No transform controls found for this model');
       return;
     }
-    this.sceneService.scene.add(controls as unknown as THREE.Object3D);
+    const helper = controls.getHelper()
+    if (helper) {
+      this.sceneService.scene.add(helper)
+      helper.visible = true
+    }
   }
 
   disposeAllControls(): void {
     this.transformControlsMap.forEach((controls, target) => {
       controls.detach();
-      this.sceneService.scene.remove(controls as unknown as THREE.Object3D);
+      const helper = controls.getHelper()
+      if (helper) {
+        helper.visible = false
+      }
       controls.dispose();
     });
     this.transformControlsMap.clear();

@@ -7,14 +7,15 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 export class ModelLoaderService {
   private objLoader = new OBJLoader();
 
-  constructor(private sceneService: SceneService) {}
+  constructor(private sceneService: SceneService) { }
 
   async loadOBJModel(url: string): Promise<THREE.Group> {
     return new Promise((resolve, reject) => {
       this.objLoader.load(
         url,
         (object) => {
-          object.scale.set(0.5, 0.5, 0.5);
+          object.scale.set(0.3, 0.3, 0.3)
+          object.rotation.set(Math.PI / 2, 0, Math.PI/9)
           this.sceneService.scene.add(object);
           resolve(object);
         },

@@ -66,19 +66,22 @@ export class SceneService {
     this.scene.add(object);
   }
 
-  createBoundingBox(size: number = 2): THREE.LineSegments {
+  createBoundingBox(size: number = 2, position?: THREE.Vector3): THREE.LineSegments {
     const boxGeometry = new THREE.BoxGeometry(size, size, size);
     const edgesGeometry = new THREE.EdgesGeometry(boxGeometry);
     const edgesMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
     const boundingBox = new THREE.LineSegments(edgesGeometry, edgesMaterial);
 
-    boundingBox.position.set(
-      Math.random() * 5 - 2.5,
-      Math.random() * 5 - 2.5,
-      Math.random() * 5 - 2.5,
-    );
+    if (position) {
+      boundingBox.position.copy(position);
+    } else {
+      boundingBox.position.set(
+        Math.random() * 5 - 2.5,
+        Math.random() * 5 - 2.5,
+        Math.random() * 5 - 2.5,
+      );
+    }
 
-    // Add invisible mesh for easier selection
     const invisibleMaterial = new THREE.MeshBasicMaterial({ visible: false });
     const invisibleMesh = new THREE.Mesh(boxGeometry, invisibleMaterial);
     boundingBox.add(invisibleMesh);
@@ -114,10 +117,10 @@ export class SceneService {
 
     const distance = zoomFactor
       ? (maxDimension /
-          Math.tan(THREE.MathUtils.degToRad(this.camera.fov * 0.5))) *
-        zoomFactor
+        Math.tan(THREE.MathUtils.degToRad(this.camera.fov * 0.5))) *
+      zoomFactor
       : maxDimension /
-        Math.tan(THREE.MathUtils.degToRad(this.camera.fov * 0.5));
+      Math.tan(THREE.MathUtils.degToRad(this.camera.fov * 0.5));
 
     this.camera.position.set(center.x, center.y - distance, center.z);
     this.camera.lookAt(center);
