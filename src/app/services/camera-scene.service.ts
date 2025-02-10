@@ -23,6 +23,7 @@ export class SceneService {
       antialias: true,
       stencil: false,
       depth: true,
+      alpha: true
     });
     this.renderer.setPixelRatio(window.devicePixelRatio);
 

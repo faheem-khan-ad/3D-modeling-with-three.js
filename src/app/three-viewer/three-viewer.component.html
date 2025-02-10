@@ -14,6 +14,9 @@
     <button class="add-box" [ngClass]="{'red': isAddingCube}" (click)="toogleAddButton()">
       {{ !isAddingCube ? 'Add bounding box' :'double click to drop'}}
     </button>
+    <button class="add-box" (click)="addModelToBox()">
+      Load Model
+    </button>
   </div>
   <div #rendererContainer id="rendererContainer"></div>
 </div>

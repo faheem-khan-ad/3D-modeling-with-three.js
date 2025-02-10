@@ -77,13 +77,8 @@ export class ThreeViewerComponent implements OnInit, OnDestroy {
     this.sceneService.initializeScene(this.rendererContainer);
     this.controls = this.controlsService.initializeOrbitControls();
     this.setupEventListeners();
-    this.loadModels();
+    this.loadModelFiles([MODEL_URL])
     this.animate();
-  }
-
-  private loadModels(): void {
-    this.loadModelFiles([MODEL_URL]);
-    this.loadOBJModel('assets/APXBL06B_43-CT5.obj');
   }
 
   private setupEventListeners(): void {
@@ -162,24 +157,24 @@ export class ThreeViewerComponent implements OnInit, OnDestroy {
   }
 
   private handleKeyDown(event: KeyboardEvent): void {
-    if (!this.objModel) return;
-    switch (event.key.toLowerCase()) {
-      case 't':
-        this.controlsService.setTransformMode(this.objModel, 'translate');
-        break;
-      case 'r':
-        this.controlsService.setTransformMode(this.objModel, 'rotate');
-        break;
-      case 's':
-        this.controlsService.setTransformMode(this.objModel, 'scale');
-        break;
-      case 'q':
-        this.controlsService.hideTransformHelpers();
-        break;
-      case 'w':
-        this.controlsService.showTransformHelperForModel(this.objModel);
-        break;
-    }
+    // if (!this.objModel) return;
+    // switch (event.key.toLowerCase()) {
+    //   case 't':
+    //     this.controlsService.setTransformMode(this.objModel, 'translate');
+    //     break;
+    //   case 'r':
+    //     this.controlsService.setTransformMode(this.objModel, 'rotate');
+    //     break;
+    //   case 's':
+    //     this.controlsService.setTransformMode(this.objModel, 'scale');
+    //     break;
+    //   case 'q':
+    //     this.controlsService.hideTransformHelpers();
+    //     break;
+    //   case 'w':
+    //     this.controlsService.showTransformHelperForModel(this.objModel);
+    //     break;
+    // }
   }
 
   updateTransformMode(mode: 'translate' | 'rotate' | 'scale'): void {
@@ -191,9 +186,9 @@ export class ThreeViewerComponent implements OnInit, OnDestroy {
 
   private loadOBJModel(url: string): void {
     this.modelLoader
-      .loadOBJModel(url)
+      .loadOBJModel(url, this.selectedBoundingBox as THREE.LineSegments)
       .then((object) => {
-        this.objModel = object;
+        // this.objModel = object;
         this.transformObj =
           this.controlsService.createTransformControls(object);
 
@@ -219,6 +214,14 @@ export class ThreeViewerComponent implements OnInit, OnDestroy {
     this.boundingBoxes.push(boundingBox);
     this.sceneService.addObjectToScene(boundingBox);
     this.controlsService.createTransformControls(boundingBox);
+  }
+
+  addModelToBox(): void {
+    if(this.selectedBoundingBox) {
+      console.log('this.selectedBoundingBox',this.selectedBoundingBox)
+      this.loadOBJModel('assets/APXBL06B_43-CT5.obj');
+      // this.loadOBJModel('assets/untitled.obj');
+    }
   }
 
   toogleAddButton(): void {
@@ -321,6 +324,4 @@ export class ThreeViewerComponent implements OnInit, OnDestroy {
 
     return intersects[0].point;
   }
-
-
 }
