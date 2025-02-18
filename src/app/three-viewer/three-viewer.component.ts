@@ -219,8 +219,12 @@ export class ThreeViewerComponent implements OnInit, OnDestroy {
   addModelToBox(): void {
     if(this.selectedBoundingBox) {
       console.log('this.selectedBoundingBox',this.selectedBoundingBox)
-      this.loadOBJModel('assets/APXBL06B_43-CT5.obj');
-      // this.loadOBJModel('assets/untitled.obj');
+      // this.loadOBJModel('assets/APXBL06B_43-CT5.obj');
+      // this.loadOBJModel('assets/Antenna/Dish/HX6-11W-2WH/HX6-11W-2WH.obj');
+      // this.loadOBJModel('assets/Antenna/Omni/3X-RRV4-65B-R12/3X-RRV4-65B-R12.obj');
+      // this.loadOBJModel('assets/Antenna/Panel/APXBL06B_43-CT5/APXBL06B_43-CT5.obj');
+      // this.loadOBJModel('assets/Antenna/Yagi/BENELEC_02682Z/BENELEC_02682Z.obj');
+      this.loadOBJModel('assets/Antenna/Helical/Poynting_HELI-3/Poynting_HELI-3.obj');
     }
   }
 
