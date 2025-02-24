@@ -7,11 +7,11 @@ import { TransformControls } from 'three/examples/jsm/controls/TransformControls
 @Injectable()
 export class ControlsService {
   private orbitControls!: OrbitControls;
-  private transformControlsMap: Map<THREE.Object3D, TransformControls> =
+  private readonly transformControlsMap: Map<THREE.Object3D, TransformControls> =
     new Map();
   private currentTransformTarget: THREE.Object3D | null = null;
 
-  constructor(private sceneService: SceneService) { }
+  constructor(private readonly sceneService: SceneService) { }
 
   initializeOrbitControls(): OrbitControls {
     this.orbitControls = new OrbitControls(
@@ -76,6 +76,19 @@ export class ControlsService {
     if (controls) {
       controls.setMode(mode);
     }
+  }
+
+  createBoundingBox(position: THREE.Vector3, geometry: { x: number, y: number, z: number } = { x: 2, y: 2, z: 2 }): THREE.LineSegments {
+    const boxGeometry = new THREE.BoxGeometry(geometry.x, geometry.y, geometry.z);
+    const edgesGeometry = new THREE.EdgesGeometry(boxGeometry);
+    const edgesMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+    const boundingBox = new THREE.LineSegments(edgesGeometry, edgesMaterial);
+    boundingBox.position.copy(position);
+
+    const invisibleMaterial = new THREE.MeshBasicMaterial({ visible: false });
+    const invisibleMesh = new THREE.Mesh(boxGeometry, invisibleMaterial);
+    boundingBox.add(invisibleMesh);
+    return boundingBox;
   }
 
   selectBoundingBox(boundingBox: THREE.Object3D): void {

@@ -4,10 +4,10 @@ import { ElementRef, Injectable } from '@angular/core';
 
 @Injectable()
 export class InteractionService {
-  private raycaster = new THREE.Raycaster();
-  private mouse = new THREE.Vector2();
+  private readonly raycaster = new THREE.Raycaster();
+  private readonly mouse = new THREE.Vector2();
 
-  constructor(private sceneService: SceneService) {}
+  constructor(private readonly sceneService: SceneService) { }
 
   handleMouseDown(
     event: MouseEvent,
@@ -32,9 +32,13 @@ export class InteractionService {
     this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
   }
 
-  handleMouseWheel(event: WheelEvent, camera: THREE.PerspectiveCamera): void {
+  handleMouseWheel(event: WheelEvent): void {
     const zoomSpeed = 0.5;
-    camera.position.z += event.deltaY * zoomSpeed * 0.01;
-    camera.position.z = THREE.MathUtils.clamp(camera.position.z, 2, 20);
+    this.sceneService.camera.position.z += event.deltaY * zoomSpeed * 0.01;
+    this.sceneService.camera.position.z = THREE.MathUtils.clamp(
+      this.sceneService.camera.position.z,
+      1,
+      40,
+    );
   }
 }

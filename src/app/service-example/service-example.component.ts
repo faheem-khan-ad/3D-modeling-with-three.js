@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../services/data.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,11 +10,8 @@ import { CommonModule } from '@angular/common';
 export class ServiceExampleComponent implements OnInit {
   posts: any[] = [];
 
-  constructor(private dataService: DataService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.dataService.getPosts().subscribe((data) => {
-      this.posts = data.slice(0, 15);
-    });
   }
 }

@@ -14,9 +14,14 @@
     <button class="add-box" [ngClass]="{'red': isAddingCube}" (click)="toogleAddButton()">
       {{ !isAddingCube ? 'Add bounding box' :'double click to drop'}}
     </button>
-    <button class="add-box" (click)="addModelToBox()">
-      Load Model
-    </button>
+    <div class="model-selector">
+      <select [value]="selectedModel?.name ?? ''" (change)="onModelSelect($event)">
+        <option value="" selected disabled>{{ !isAddingModel ? 'Add Model' :'double click to drop'}}</option>
+        <option *ngFor="let model of objModelsData" [value]="model?.name">
+          {{ model?.name }}
+        </option>
+      </select>
+    </div>
   </div>
   <div #rendererContainer id="rendererContainer"></div>
 </div>

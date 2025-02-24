@@ -33,4 +33,35 @@ export const CANVAS_VIEWER = {
   AUTO_SAVE_INTERVAL: 300000, // 5 minutes
 };
 
-export const MODEL_URL = "https://dronos-telco-tpm-audit-65d6f93ac19ed972470b12db.s3.ap-southeast-1.amazonaws.com/mission-661fa76ec02424b3be71d068/meshNxz/ec7dfa51-273b-4c33-b638-0ed878d8605c_2024-04-17-10-56-10.nxs?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAX4QGSDYOYRTEQQR7%2F20250217%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20250217T114119Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEwaDmFwLXNvdXRoZWFzdC0xIkcwRQIhAOsU52th7g1yIEHUU85iElFNz2u5uFz%2Bm2UiHPLXyfKCAiBzWGR9YbXy4d989FPd5B6ae18ve4Ewd7YoBgaSEhzuiCqgBQh1EAAaDDU0MjI1MzM5MTM4OSIMvPCw%2B0CMKU8CioSaKv0E20ePhkwzJ4NibvUUDE%2FNMUWsXJE4dUdjBUJMeu6Z8hBDdFm%2FdPjE0VzrCiKHoV3uKRpkaDpNR7R5p5YKOW6cYPVbpsmILGv43%2BJGswSLBzmD3KXuYUmAtpErTFJQwi3f8EjdNKEfXzVUIjENorzgJbkXyQrvyG2E%2F713tDHQObyoeYuj6yGxlsJuvBZvfP5bU1GbkGcpvvWZRKgT%2FatA1gJ0nh6MiLrd%2B42f2TrqndPpthNMgTl6RB3odI%2BkdIERuBjp1HfPYiMMq49Z0GT9QBSGJaP9v%2F3CaduAG2stgvhe4Gzsz1voCi%2FNwCG5qTIB2q%2BY6CMGc%2Fw34UC1X9v6F%2BTsr0s7UN0gk5TgcYhaT7Ellmg5EZkp5ASqUQsgNJPM2qE7iYAgIMs6%2FWaxqrVAfAmYcdqb7Ctz8Q6XVe1i4MkdYT%2BU8Mfkmv3Wd9dLjoJzuD%2BOD6JdUqd3%2F%2Bfk6O%2FetQfi8gl1wRfzJ84YbVsewqW065%2Fv7oxlCVpFkGS1Kt6PF3O5LnWg65w%2FY8SjyesVbtNOXC5Htx8nzdewrOFcWlvzF%2Fmrk%2FnCQO2qfZS%2FxrVbFk1POKx5Ike7aMjQvur7dH8kaPh91PUuIt3gfNovWP2ajvKEbh5IVF%2FJ3NylJpI2fAesiN7lLRVktdIv3tvs67VnPtrG%2FwVsipqSlp4dq8c27BEz44N9RGgc1jvz2QStorI70uQEWn0ZNNVenwlTxa0D7DfL8StAYqwlUnurN%2ByX1tpIkStCUoSCaAdz8P%2F%2Bx45eY7MqnQ2xX3GqKFTLUXxUXwIlch7ai7mTTyDL7FnAtaZ7GOj%2B6626XrDvZYPoSaqf2PlU305hfUTYOjDfwMy9BjqbAYNbOKBI4qKV%2B%2F%2BLblZFnMPLzuPp%2FKJ8RM6qUbqRF0wDJHGMUH1Ky61VhJlKNwRcoYDHPrrdn%2BeHLJYFOSi7wqoJX%2FCy42A9gd23vpMFqQlj7zJ%2F%2BGhZMzbbZ09bhwURYlrsaOKhJQ%2FMvY7djQqWGeOGNeDwt6Ej%2FC%2B7a0SVv0ulqBd0fV9A9FQnLdor4OoLUhkgupnxBoTfmALP&X-Amz-Signature=a6dba18195665e58463b259b9a07800cf4dbcd94ecdc83d712a0b8017a57bfb9&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+export const BOUNDING_BOX_SIZE = { x: 2, y: 2, z: 2 }
+
+export const OBJMODELSDATA = [{
+  name: 'Poynting_HELI-3',
+  path: 'assets/Antenna/Helical/Poynting_HELI-3/Poynting_HELI-3.obj',
+  geometry: { x: 1.04, y: 0.145, z: 0.12 }
+  // geometry: { x: 0.145, y: 0.12, z: 1.04 }
+},
+{
+  name: 'Antenna-Omni',
+  path: 'assets/Antenna/Omni/3X-RRV4-65B-R12/3X-RRV4-65B-R12.obj',
+  geometry: { x: 0.58, y: 2.1, z: 0.58 }
+
+},
+{
+  name: 'Antenna-Dish',
+  path: 'assets/Antenna/Dish/HX6-11W-2WH/HX6-11W-2WH.obj',
+  geometry: { x: 1.8, y: 1.8, z: 1.206 }
+},
+{
+  name: 'Antenna-Panel',
+  path: 'assets/Antenna/Panel/APXBL06B_43-CT5/APXBL06B_43-CT5.obj',
+  geometry: { x: 0.35, y: 0.62, z: 0.2 }
+},
+{
+  name: 'BENELEC_174502S',
+  path: 'assets/Transceiver%20Junction/Splitters/BENELEC_174502S/BENELEC_174502S.obj',
+  geometry: { x: 0.082, y: 0.105, z: 0.024 }
+}
+]
+
+export const MODEL_URL = 'https://dronos-telco-tpm-audit-65d6f93ac19ed972470b12db.s3.ap-southeast-1.amazonaws.com/mission-66138221b88124db892b8719/meshNxz/fc4eca68-45cf-4a59-a2ac-99b3b8b224fd_2024-04-08-08-46-44.nxs?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAX4QGSDYOQW3JEHLD%2F20250224%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20250224T093647Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLXNvdXRoZWFzdC0xIkYwRAIgPPQ2kPbh10QkkqiEkHB%2B3%2FhvrYhs3xGfjA6TiWmbAAQCIC82Hk3TKd0UmtUg3VRdoAErgxjtMX6ZoayxSIF%2FqeJAKqAFCCsQABoMNTQyMjUzMzkxMzg5IgwwwLiS03ru4VOfZmgq%2FQTdoKpnkm0uUhIrKlT3bh33ojLCAukSHMkaUhKlnb%2BhUkdOQlGjzupWjm4981Z4MHiTFXTFHwrU5myvtBxqFQyvc7JoNymjCy1YmE%2FeDU1xGZ%2BIEiTDgLXq9Ys%2Bwtz%2BwdzB2u6eLJ77Offe%2BmMA8ftiINs0wiWroreLcgR7DnbWffRbeJwbpq%2BlHLSgPgNAz42kXNa77%2BWIa6vN5OV54WbXVaCenq8IKvcEqtjnMgY10BZxAlp5HPfLDznDG2HTaLc7dsBsb%2Fw0QoZaehcUn4qJhwQhlO1cKTi%2FK1Ge%2BNFotEX49iXCt35Htj5hG0NHPcKw5KkjEDnzDsSibIEZU45ej0JhTen2V1L4weajKBjfNNJOq2gCgweAHdAsVVEPWUuS09P8%2F4ZDAWrVl3w%2FpiUTCX8JW94hvt2S4GuKaObrFmIR%2B%2FjOhazGXyCrOPedJHUComlcri0MLenvA7vAG0OpABNEL5LUlFxoC2P83Suqmol%2Bfj%2BSBHq7hsCjeqc9xWuZ913VKh7XqtYzhhZ7%2FvGtP5q11zU8NBFJITUb1eN0rk6gB4vjSl5BpzrmFIJzcToPscYoJl0PFVf08nn%2FA1u4gf8S7NqKdZUVfHbqXV49wgFqNUZxC8W7NbLpn41TTKXzapMkBzHragVk%2BXxHXy8n5BXNrShk6fF%2BRVt9kf%2Fsxn7QPhtPFV6N3OWmDJk19hoOjyToCCIRZ4TgIZIWg9Ij71VgzBy7SpGv7WvRflxLbFKQR%2B%2FAm3PKs%2Fn7BubF%2F%2FInZjpVYOoHOcHqymSh%2FDjza%2Fo9EX7ZYW3bFI7TgeM%2FZlP0C9Dxy8QYPiXh6nYby5SwhWompDWedH5CZYrFMK%2F78L0GOpwBIKuK%2FwwfpwX2VIuklaSBJkQkIrS4we4gVowrYia67U2paGErFBH5yCmjUZkK%2FQUrHQnEwaPUd7pjjS48ZzuaoRprcPhEBbsjr76ClB6lWur06EPU72EpIzaYJkPqmQn6BT2x7sLcd32sWl6oqc4ttYnb5lApNRG0iM7dUKtmcOp9yI3xnjy%2F4U0Y%2BRL0TYOY6TpZL%2FRzt7c%2BOxkZ&X-Amz-Signature=66b2994f963f25dd1ae6af5dfcb4f340c85696cebc86200e4ef715cee9400303&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject'

@@ -11,7 +11,7 @@
   height: 550px; /* Ensure the container has a height */
   background-color: transparent;
   border: 2px solid black;
-  border-radius: 10x;
+  border-radius: 10px;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -28,7 +28,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.control-panel button {
+.control-panel button, .model-selector > select {
   margin: 5px;
   padding: 5px 10px;
   border: none;
@@ -38,7 +38,7 @@
   cursor: pointer;
 }
 
-.control-panel button:hover {
+.control-panel button:hover, .model-selector:hover > select {
   background-color: #0056b3;
 }
 

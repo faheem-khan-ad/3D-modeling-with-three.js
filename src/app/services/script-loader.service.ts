@@ -5,7 +5,7 @@ import { AssetUrlPipe } from '../pipes/asset-url.pipe';
   providedIn: 'root',
 })
 export class ScriptLoaderService {
-  private assetUrlPipe = new AssetUrlPipe();
+  private readonly assetUrlPipe = new AssetUrlPipe();
 
   loadScripts(files: string[], callback: Function): void {
     const loadedScripts: any[] = [];

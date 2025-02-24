@@ -67,30 +67,6 @@ export class SceneService {
     this.scene.add(object);
   }
 
-  createBoundingBox(size: number = 2, position?: THREE.Vector3): THREE.LineSegments {
-    const boxGeometry = new THREE.BoxGeometry(size, size, size);
-    const edgesGeometry = new THREE.EdgesGeometry(boxGeometry);
-    const edgesMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
-    const boundingBox = new THREE.LineSegments(edgesGeometry, edgesMaterial);
-
-    if (position) {
-      boundingBox.position.copy(position);
-    } else {
-      boundingBox.position.set(
-        Math.random() * 5 - 2.5,
-        Math.random() * 5 - 2.5,
-        Math.random() * 5 - 2.5,
-      );
-    }
-
-    const invisibleMaterial = new THREE.MeshBasicMaterial({ visible: false });
-    const invisibleMesh = new THREE.Mesh(boxGeometry, invisibleMaterial);
-    boundingBox.add(invisibleMesh);
-
-    this.scene.add(boundingBox);
-    return boundingBox;
-  }
-
   centerObject(
     obj: THREE.Object3D,
     zoomFactor?: number,
